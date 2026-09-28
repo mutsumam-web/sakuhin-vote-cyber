@@ -1,0 +1,4412 @@
+html{height:100%;}
+
+/* WIDTH-BASED DESIGN CONTRACT */
+/* All visual dimensions are derived from viewport width. */
+:root{
+  --bg:#05070a;
+  --panel:#080d12;
+  --panel2:#0b1219;
+  --cyan:#27efff;
+  --cyan2:#79f7ff;
+  --magenta:#ff2bb5;
+  --text:#edfaff;
+  --muted:#78919a;
+  --muted2:#b5c8cd;
+  --line:rgba(39,239,255,.46);
+  --line-soft:rgba(39,239,255,.18);
+}
+
+*{box-sizing:border-box}
+html,
+html,body{overflow-anchor:none;}
+body{margin:0;padding:0;background:var(--bg)}
+body{
+  min-height:100%;
+  overflow-x:clip;
+  color:var(--text);
+  font-family:"Noto Sans JP",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at 70% -10%,rgba(39,239,255,.11),transparent 32%),
+    radial-gradient(circle at 5% 45%,rgba(255,43,181,.035),transparent 28%),
+    #05070a;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
+  background:repeating-linear-gradient(180deg,transparent 0,transparent 0.7574vw,rgba(39,239,255,.018) 1.0171vw);
+  opacity:.8;
+}
+button{font:inherit;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+
+.app-shell{
+  width:100vw;
+  margin:auto;
+  padding:1.8% 0 0;
+}
+
+/* HEADER */
+.app-header{
+  position:relative;
+  width:100%;
+  aspect-ratio:984/124;
+  padding:1.3% 2.35% 1.15%;
+  overflow:hidden;
+  border:.10vw solid var(--line);
+  background:linear-gradient(90deg,rgba(39,239,255,.045),transparent 55%,rgba(255,43,181,.025)),var(--panel);
+  box-shadow:inset 0 0 0 .10vw rgba(39,239,255,.08),0 0 2vw rgba(39,239,255,.06);
+}
+.app-header::before,.app-header::after{
+  content:"";position:absolute;width:2.4%;height:20%;border-color:var(--cyan);border-style:solid;pointer-events:none;
+}
+.app-header::before{left:-.1vw;top:-.1vw;border-width:.22vw 0 0 .22vw}
+.app-header::after{right:-.1vw;bottom:-.1vw;border-width:0 .22vw .22vw 0}
+.header-topline{
+  display:flex;justify-content:space-between;align-items:center;gap:2%;
+  font:500 .82vw/1 Montserrat,sans-serif;letter-spacing:0.17vw;color:#8ba9b0;white-space:nowrap;
+}
+.header-feed b{color:var(--cyan);font-weight:500}
+.app-header h1{
+  margin:1% 0 0;font:400 5.05vw/1 Georgia,"Times New Roman",serif;
+  color:#f1fcff;letter-spacing:0.07vw;white-space:nowrap;overflow:hidden;
+  text-shadow:0 0 1.2vw rgba(39,239,255,.13);
+}
+.header-rule{width:72%;height:.30vw;margin-top:1.25%;background:linear-gradient(90deg,var(--cyan),rgba(39,239,255,.08));box-shadow:0 0 1vw rgba(39,239,255,.42)}
+
+/* VOTE STATUS */
+.selection-console{
+  display:grid;grid-template-columns:59.5% 40.5%;width:100%;aspect-ratio:984/78;margin:3.1379vw 0;
+  border:.10vw solid var(--line);background:var(--panel);overflow:hidden;
+}
+.console-left,.console-right{display:flex;align-items:center;min-width:0}
+.console-left{padding:1.15% 2.1%;gap:2.6%;border-right:.10vw solid var(--line-soft)}
+.console-label{font:400 2.25vw/1 Georgia,"Times New Roman",serif;letter-spacing:0.11vw;white-space:nowrap}
+#selected{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:1.30vw;color:var(--muted2)}
+.console-right{justify-content:flex-end;gap:1.55%;font:400 1.30vw Montserrat,sans-serif;letter-spacing:0.06vw}
+.console-right .vote-button{flex:0 0 30%;width:30%;height:68%;padding:1% 2%;border:.10vw solid var(--cyan);background:rgba(39,239,255,.025);color:#bfeaf0;cursor:pointer;font-size:1.45vw;letter-spacing:0.06vw}
+.console-right .vote-button:not(:disabled){background:var(--cyan);color:#021014;box-shadow:0 0 1vw rgba(39,239,255,.18)}
+.console-right .vote-button:disabled{opacity:.5;cursor:not-allowed}
+.console-right strong{font-size:3.15vw;font-weight:400;color:#fff}
+.capacity-dots{display:flex;gap:1.55%}
+.capacity-dot{width:3.05vw;aspect-ratio:1;border:.10vw solid rgba(121,247,255,.52);border-radius:50%}
+.capacity-dot.active{background:var(--cyan);box-shadow:0 0 0.7vw rgba(39,239,255,.45)}
+
+/* CARDS / REDEFINED GRID
+   8 : 34 : 33 : 20
+   横幅は比率固定、縦方向は画像・内容量に追従
+*/
+.works-list{
+  display:flex;
+  flex-direction:column;
+  gap:2.4%;
+  width:100%;
+}
+.work-card{
+  position:relative;
+  display:grid;
+  grid-template-columns:8% 34% 33% 20%;
+  column-gap:1.6667%;
+  align-items:start;
+  width:100%;
+  min-height:17vw;
+  overflow:hidden;
+  border:.10vw solid var(--line);
+  background:linear-gradient(90deg,rgba(39,239,255,.035),transparent 43%,rgba(255,43,181,.018)),var(--panel);
+  box-shadow:inset 0 0 0 .10vw rgba(39,239,255,.035),0 0 1.4vw rgba(0,0,0,.45);
+}
+.work-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+  background:repeating-linear-gradient(180deg,transparent 0,transparent 1.2%,rgba(39,239,255,.018) 1.25%,transparent 1.45%);
+}
+.work-card::after{
+  content:"";
+  position:absolute;
+  right:-.1vw;
+  top:-.1vw;
+  width:2.6%;
+  height:17%;
+  border-top:.20vw solid var(--cyan);
+  border-right:.20vw solid var(--cyan);
+  z-index:30;
+  pointer-events:none;
+}
+.work-number{
+  position:relative;
+  z-index:12;
+  left:auto;
+  top:auto;
+  width:auto;
+  margin:7% 0 0 18%;
+  font:400 2.45vw/1 Montserrat,sans-serif;
+  color:#d9faff;
+  letter-spacing:0.02vw;
+}
+.work-number::after{
+  content:"";
+  display:block;
+  width:46%;
+  height:.18vw;
+  margin-top:15%;
+  background:var(--cyan);
+  box-shadow:0 0 0.6vw rgba(39,239,255,.45);
+}
+
+/* IMAGE: intrinsic ratio controls card height */
+.work-image-wrap{
+  position:relative;
+  z-index:2;
+  left:auto;
+  top:auto;
+  width:100%;
+  height:auto;
+  min-height:17vw;
+  align-self:start;
+  overflow:hidden;
+  border:.10vw solid rgba(39,239,255,.55);
+  background:#030609;
+  box-shadow:inset 0 0 1.2vw rgba(39,239,255,.06),0 0 0.9vw rgba(39,239,255,.04);
+}
+.work-image{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:contain;
+}
+.work-image-wrap::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(90deg,transparent 49.5%,rgba(39,239,255,.05) 50%,transparent 50.5%),linear-gradient(180deg,transparent 78%,rgba(0,0,0,.25));
+}
+.image-hud,.target-label,.signal-meter,.scan-label,.crt-label,.crt-signal,.scan-beam{display:none}
+
+/* INFO */
+.work-info{
+  position:relative;
+  z-index:10;
+  left:auto;
+  top:auto;
+  width:100%;
+  height:auto;
+  min-width:0;
+  min-height:17vw;
+  padding:3% 0 2%;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  gap:1.8%;
+  overflow:visible;
+}
+.work-info-top{
+  flex:0 0 auto;
+  min-width:0;
+  overflow:hidden;
+  font:500 1.02vw/1.15 Montserrat,sans-serif;
+  color:#8eaeb5;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.work-status{color:var(--cyan);white-space:nowrap}
+.data-block{
+  flex:0 0 auto;
+  min-width:0;
+  max-width:100%;
+  padding:0 0 0 5%;
+  border-left:.20vw solid var(--cyan);
+  overflow:hidden;
+}
+.work-title-block{min-height:3.9vw;height:auto}
+.work-author-block{min-height:3.0vw;height:auto}
+.work-comment-block{min-height:5.5vw;height:auto}
+.data-label,.work-author-label,.work-comment-label{
+  display:block;
+  margin:0 0 2.5%;
+  font:500 .82vw/1 Montserrat,sans-serif;
+  letter-spacing:0.16vw;
+  color:var(--cyan);
+  white-space:nowrap;
+}
+.work-title{
+  width:100%;
+  overflow:hidden;
+  font-size:2.55vw;
+  font-weight:500;
+  line-height:1.16;
+  letter-spacing:0.015vw;
+  color:#f0fcff;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.work-author{
+  width:100%;
+  overflow:hidden;
+  font-size:1.50vw;
+  line-height:1.25;
+  color:#d0e6eb;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.work-comment{
+  width:100%;
+  margin:0;
+  overflow:hidden;
+  font-size:1.48vw;
+  line-height:1.42;
+  color:#c6d8dd;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+
+/* ACTION: independent 20% column, right aligned */
+.work-actions{
+  position:relative;
+  z-index:20;
+  top:auto;
+  right:auto;
+  width:100%;
+  height:auto;
+  min-height:17vw;
+  padding:10% 7% 7% 0;
+  display:flex;
+  flex-direction:column;
+  gap:8%;
+  align-items:stretch;
+  justify-content:flex-start;
+}
+.detail-btn,.select-btn{
+  width:100%;
+  min-width:0;
+  min-height:3.9vw;
+  padding:2% 7%;
+  border:.10vw solid rgba(121,247,255,.42);
+  background:rgba(3,10,14,.68);
+  color:#d6edf1;
+  cursor:pointer;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.select-btn{
+  order:-1;
+  font:500 1.00vw Montserrat,sans-serif;
+  letter-spacing:0.14vw;
+}
+.detail-btn{
+  font:500 1.00vw Montserrat,sans-serif;
+  letter-spacing:0.15vw;
+  border-color:rgba(39,239,255,.7);
+}
+.detail-btn::after{content:"→";float:right;color:var(--cyan)}
+.select-btn.selected{background:var(--cyan);color:#021014;border-color:var(--cyan);box-shadow:0 0 1vw rgba(39,239,255,.25)}
+.work-card:nth-child(3n+1) .select-btn{min-height:4.2vw}
+.work-card:nth-child(3n+1) .detail-btn{min-height:3.7vw}
+.work-card:nth-child(3n+2) .select-btn{min-height:3.8vw}
+.work-card:nth-child(3n+2) .detail-btn{min-height:4.1vw}
+.work-card:nth-child(3n) .select-btn{min-height:4.0vw}
+.work-card:nth-child(3n) .detail-btn{min-height:3.9vw}
+
+/* ONE CALLOUT LINE */
+.callout-svg{position:absolute;z-index:7;inset:0;width:100%;height:100%;overflow:hidden;pointer-events:none}
+.callout-path{fill:none;stroke:rgba(39,239,255,.72);stroke-width:.12vw;filter:drop-shadow(0 0 0.22vw rgba(39,239,255,.25))}
+.callout-target{fill:#050b10;stroke:var(--cyan);stroke-width:.10vw}
+.callout-target-core{fill:var(--cyan)}
+
+/* DOCK */
+.vote-dock{position:static;z-index:500;left:0;bottom:0;width:100%;padding:1% 0;background:linear-gradient(180deg,rgba(3,7,10,.05),rgba(3,7,10,.97) 35%);backdrop-filter:blur(0.6vw)}
+.vote-dock-inner{width:96%;aspect-ratio:984/64;margin:auto;display:flex;align-items:center;gap:1.2%;padding:1%;border:.10vw solid var(--line);background:rgba(5,15,20,.97);box-shadow:0 -0.5vw 1.8vw rgba(0,0,0,.45)}
+.dock-status{flex:1;min-width:0;overflow:hidden;color:var(--muted);font:600 .82vw Montserrat,sans-serif;letter-spacing:0.13vw;white-space:nowrap;text-overflow:ellipsis}
+.vote-button{flex:0 0 18.3%;width:18.3%;height:72%;padding:1% 3%;border:.10vw solid var(--cyan);background:rgba(39,239,255,.025);color:#bfeaf0;cursor:pointer}
+.vote-button:not(:disabled){background:var(--cyan);color:#021014;box-shadow:0 0 1vw rgba(39,239,255,.18)}
+.vote-button:disabled{opacity:.5;cursor:not-allowed}
+
+/* MODALS */
+.modal{position:fixed;z-index:10000;inset:0;display:flex;align-items:center;justify-content:center;padding:3%}
+.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(0.35vw)}
+.modal-dialog{position:relative;z-index:1;width:63%;max-height:194.7692vw;overflow:auto;border:.10vw solid var(--cyan);background:var(--panel);padding:3.5%;box-shadow:0 0 3vw rgba(39,239,255,.12)}
+.modal-close{position:absolute;right:1%;top:1%;width:7%;aspect-ratio:1;border:0;background:transparent;color:var(--cyan);font-size:3vw;cursor:pointer}
+.modal-work-image-wrap{width:100%;aspect-ratio:620/430;overflow:hidden;border:.10vw solid var(--line);background:#030609}
+.modal-work-image-wrap img{display:block;width:100%;height:100%;object-fit:contain}
+.modal-work-info{padding:3% .3% 0}.modal-kicker{color:var(--cyan);font:500 .9vw Montserrat,sans-serif;letter-spacing:0.17vw}
+.modal-dialog h2{margin:1% 0 .8%;font-size:3vw;line-height:1.25}.modal-author{color:var(--text);font-size:1.25vw}.modal-comment{margin:2.2% 0;color:var(--muted2);line-height:1.75}
+.modal-select{width:100%;aspect-ratio:620/48;border:.10vw solid var(--cyan);background:rgba(39,239,255,.05);color:var(--cyan);cursor:pointer}
+.confirm-dialog{text-align:center}.confirm-mark{width:9%;aspect-ratio:1;margin:0 auto 2%;display:grid;place-items:center;border:.10vw solid var(--cyan);color:var(--cyan);font:400 3vw Montserrat,sans-serif}
+.confirm-lead{color:var(--muted2);font-size:1.25vw;line-height:1.7}.confirm-list{width:100%;height:31%;margin:2.5% 0;overflow:hidden;text-align:left}
+.confirm-item{display:flex;align-items:center;gap:2%;width:100%;height:28%;margin-bottom:1.2%;padding:2%;border-left:.20vw solid var(--cyan);background:#0b1116;overflow:hidden}.confirm-index{flex:0 0 6%;color:var(--cyan);font:600 .92vw Montserrat,sans-serif}
+.modal-actions{display:flex;width:100%;aspect-ratio:620/46;gap:1.3%;margin-top:2.5%}.modal-actions button{flex:1;border:.10vw solid var(--line);background:transparent;color:var(--text)}.modal-submit{background:var(--cyan)!important;color:#021014!important}
+.admin-toggle{margin-top:2%;border:0;background:transparent;color:var(--muted);cursor:pointer}.admin-box{display:flex;gap:1%;margin-top:2%}.admin-box input{flex:1;min-width:0;border:.10vw solid var(--line);background:#03070a;color:var(--text);padding:2%}.admin-box button{border:.10vw solid var(--line);background:transparent;color:var(--cyan);padding:2%}
+
+
+/* =========================================================
+   BOLD REFERENCE PASS
+   2枚目の基準レイアウトへ大きく寄せる
+========================================================= */
+.app-shell{padding-top:.8%;}
+
+.selection-console{margin:1.55% 0;}
+
+
+.work-number{
+  margin:7% 0 0 18%;
+  font-size:2.45vw;
+}
+
+.work-image-wrap{
+  min-height:0;
+  aspect-ratio:4 / 3;
+  height:auto;
+  align-self:start;
+  margin-block:0.7574vw;
+}
+
+.work-image{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.work-info{
+  min-height:100%;
+  padding:3.2% 2% 2% 0;
+  gap:2.2%;
+}
+
+.work-info-top{font-size:1.02vw;}
+.data-block{padding-left:4.5%;}
+.work-title-block{min-height:0;}
+.work-author-block{min-height:0;}
+.work-comment-block{min-height:0;}
+.data-label,.work-author-label,.work-comment-label{font-size:.82vw;}
+.work-title{font-size:2.55vw;line-height:1.12;}
+.work-author{font-size:1.50vw;}
+.work-comment{font-size:1.38vw;line-height:1.38;}
+
+.work-actions{
+  min-height:100%;
+  padding:10% 5% 7% 0;
+  gap:8%;
+}
+.detail-btn,.select-btn{
+  min-height:3.9vw;
+  width:100%;
+  padding:2% 7%;
+  font-size:1.0vw;
+}
+
+.work-card:nth-child(3n+1) .select-btn{min-height:4.2vw}
+.work-card:nth-child(3n+1) .detail-btn{min-height:3.7vw}
+.work-card:nth-child(3n+2) .select-btn{min-height:3.8vw}
+.work-card:nth-child(3n+2) .detail-btn{min-height:4.1vw}
+.work-card:nth-child(3n) .select-btn{min-height:4.0vw}
+.work-card:nth-child(3n) .detail-btn{min-height:3.9vw}
+
+.vote-dock-inner{width:96%;}
+.vote-button{font-size:2.2vw;}
+
+/* =========================================================
+   CYBERPUNK EFFECT PASS
+   レイアウト比率は変更しない。視覚効果のみ追加。
+========================================================= */
+
+:root{
+  --cyan-hot:#39f7ff;
+  --cyan-glow:rgba(39,239,255,.65);
+  --magenta-hot:#ff38c8;
+}
+
+/* 全体：微細な電子走査＋縦方向の光 */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:9997;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,transparent 0,rgba(39,239,255,.025) 49.8%,rgba(39,239,255,.07) 50%,rgba(39,239,255,.025) 50.2%,transparent 100%),
+    linear-gradient(180deg,transparent 0,rgba(39,239,255,.035) 49.8%,rgba(39,239,255,.075) 50%,rgba(39,239,255,.035) 50.2%,transparent 100%);
+  background-size:100% 100%,100% 100%;
+  mix-blend-mode:screen;
+  opacity:.42;
+  animation:systemPulse 5s ease-in-out infinite;
+}
+
+@keyframes systemPulse{
+  0%,100%{opacity:.28}
+  48%{opacity:.42}
+  52%{opacity:.22}
+}
+
+/* HEADER：走査光＋発光ライン */
+.app-header{
+  box-shadow:
+    inset 0 0 0 .10vw rgba(39,239,255,.10),
+    inset 0 0 2.8vw rgba(39,239,255,.035),
+    0 0 1.2vw rgba(39,239,255,.10);
+}
+
+.app-header::after{
+  animation:headerCorner 2.8s ease-in-out infinite;
+}
+
+@keyframes headerCorner{
+  0%,100%{opacity:.55}
+  50%{opacity:1;filter:drop-shadow(0 0 .55vw var(--cyan-glow))}
+}
+
+.header-rule{
+  position:relative;
+  overflow:hidden;
+}
+.header-rule::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-18%;
+  width:18%;
+  height:100%;
+  background:var(--cyan-hot);
+  box-shadow:0 0 1.2vw var(--cyan-hot),0 0 2.2vw var(--cyan-hot);
+  animation:ruleSweep 3.2s linear infinite;
+}
+@keyframes ruleSweep{
+  from{left:-18%}
+  to{left:110%}
+}
+
+/* STATUS：電子端末っぽい区切り */
+.selection-console{
+  position:relative;
+  box-shadow:
+    inset 0 0 1.8vw rgba(39,239,255,.035),
+    0 0 1vw rgba(39,239,255,.055);
+}
+.selection-console::after{
+  content:"SYS // LIVE";
+  position:absolute;
+  right:1.2%;
+  bottom:5%;
+  font:500 .58vw/1 Montserrat,sans-serif;
+  letter-spacing:0.16vw;
+  color:rgba(39,239,255,.32);
+  pointer-events:none;
+}
+
+.capacity-dot{
+  transition:background .2s ease,box-shadow .2s ease,transform .2s ease;
+}
+.capacity-dot.active{
+  animation:dotPulse 1.8s ease-in-out infinite;
+}
+.capacity-dot:nth-child(2).active{animation-delay:.15s}
+.capacity-dot:nth-child(3).active{animation-delay:.30s}
+@keyframes dotPulse{
+  0%,100%{transform:scale(.94);box-shadow:0 0 .45vw rgba(39,239,255,.28)}
+  50%{transform:scale(1.08);box-shadow:0 0 1.1vw rgba(39,239,255,.78),0 0 2vw rgba(39,239,255,.22)}
+}
+
+/* CARD：スキャンライン＋左右の電路 */
+.work-card{
+  isolation:isolate;
+  box-shadow:
+    inset 0 0 0 .10vw rgba(39,239,255,.045),
+    inset 0 0 3vw rgba(39,239,255,.018),
+    0 0 1.2vw rgba(0,0,0,.55);
+  transition:border-color .2s ease,box-shadow .2s ease,filter .2s ease;
+}
+.work-card:hover,
+.work-card:focus-within{
+  border-color:rgba(39,239,255,.78);
+  box-shadow:
+    inset 0 0 2.5vw rgba(39,239,255,.035),
+    0 0 1.3vw rgba(39,239,255,.13);
+}
+
+/* カード上を横切る走査光 */
+.work-card::before{
+  background:
+    linear-gradient(180deg,transparent 0,transparent 46%,rgba(39,239,255,.10) 49%,rgba(39,239,255,.025) 51%,transparent 54%),
+    repeating-linear-gradient(180deg,transparent 0,transparent 1.2%,rgba(39,239,255,.018) 1.25%,transparent 1.45%);
+  background-size:100% 220%,100% 100%;
+  background-position:0 -120%,0 0;
+  animation:cardScan 6s linear infinite;
+}
+@keyframes cardScan{
+  0%{background-position:0 -120%,0 0}
+  100%{background-position:0 120%,0 0}
+}
+
+/* カード右上の角を発光 */
+.work-card::after{
+  filter:drop-shadow(0 0 .45vw rgba(39,239,255,.45));
+  animation:cornerFlicker 4.5s steps(1,end) infinite;
+}
+@keyframes cornerFlicker{
+  0%,88%,100%{opacity:1}
+  89%{opacity:.35}
+  90%{opacity:1}
+  92%{opacity:.55}
+  93%{opacity:1}
+}
+
+/* NUMBER：端末番号らしい発光 */
+.work-number{
+  text-shadow:0 0 .65vw rgba(39,239,255,.42);
+}
+.work-number::after{
+  animation:numberLine 2.8s ease-in-out infinite;
+}
+@keyframes numberLine{
+  0%,100%{width:42%;opacity:.65}
+  50%{width:62%;opacity:1;box-shadow:0 0 1vw rgba(39,239,255,.8)}
+}
+
+/* IMAGE：枠だけをHUD化。画像自体には加工をかけない */
+.work-image-wrap{
+  box-shadow:
+    inset 0 0 1.8vw rgba(39,239,255,.07),
+    inset 0 0 0 .10vw rgba(39,239,255,.06),
+    0 0 .8vw rgba(39,239,255,.035);
+}
+.work-image-wrap::before{
+  content:"";
+  position:absolute;
+  z-index:3;
+  inset:0;
+  pointer-events:none;
+  background:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0,rgba(255,255,255,.035) .08vw,transparent .08vw,.24vw),
+    linear-gradient(90deg,transparent 0,transparent 48%,rgba(39,239,255,.055) 50%,transparent 52%,transparent 100%);
+  opacity:.58;
+}
+.work-image-wrap::after{
+  background:
+    radial-gradient(ellipse at center,transparent 48%,rgba(0,0,0,.34) 100%),
+    radial-gradient(circle at 12% 18%,rgba(255,255,255,.11) 0 .055vw,transparent .07vw),
+    radial-gradient(circle at 72% 31%,rgba(255,255,255,.075) 0 .045vw,transparent .065vw),
+    radial-gradient(circle at 38% 76%,rgba(255,255,255,.085) 0 .05vw,transparent .07vw),
+    radial-gradient(circle at 86% 82%,rgba(255,255,255,.07) 0 .045vw,transparent .065vw),
+    linear-gradient(90deg,transparent 49.4%,rgba(39,239,255,.055) 50%,transparent 50.6%),
+    linear-gradient(180deg,transparent 78%,rgba(0,0,0,.20));
+}
+
+/* INFO：情報端末の縦ラインを発光 */
+.data-block{
+  position:relative;
+  border-left-color:var(--cyan-hot);
+  box-shadow:-.25vw 0 .7vw rgba(39,239,255,.06);
+}
+.data-label,.work-author-label,.work-comment-label{
+  text-shadow:0 0 .55vw rgba(39,239,255,.35);
+}
+.work-title{
+  text-shadow:0 0 .7vw rgba(39,239,255,.10);
+}
+
+/* ACTION：ここをサイバーパンクの主役に */
+.work-actions{
+  position:relative;
+}
+.work-actions::before{
+  content:"ACTION //";
+  position:absolute;
+  top:3.5%;
+  right:5%;
+  font:500 .55vw/1 Montserrat,sans-serif;
+  letter-spacing:0.18vw;
+  color:rgba(39,239,255,.35);
+  pointer-events:none;
+}
+.detail-btn,.select-btn{
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(90deg,rgba(39,239,255,.025),transparent 55%),
+    rgba(3,10,14,.72);
+  box-shadow:inset 0 0 1.1vw rgba(39,239,255,.025);
+  transition:background .18s ease,box-shadow .18s ease,color .18s ease,border-color .18s ease;
+}
+.detail-btn::before,.select-btn::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-45%;
+  width:35%;
+  height:100%;
+  background:linear-gradient(90deg,transparent,rgba(39,239,255,.30),transparent);
+  transform:skewX(-18deg);
+  animation:buttonSweep 3.6s linear infinite;
+  pointer-events:none;
+}
+@keyframes buttonSweep{
+  0%{left:-45%}
+  55%,100%{left:125%}
+}
+.detail-btn::after{
+  position:relative;
+  z-index:2;
+  text-shadow:0 0 .45vw rgba(39,239,255,.45);
+}
+/* SELECT -> LOCK / LOCK -> SELECT の状態遷移を対称化 */
+.select-btn.unlocking{
+  animation:selectUnlockReturn .52s ease-out !important;
+  transform-origin:center;
+}
+
+@keyframes selectUnlockReturn{
+  0%{
+    background:rgba(0,246,255,.14);
+    border-color:#ffffff;
+    color:#ffffff;
+    text-shadow:0 0 .45vw #ffffff,0 0 1vw rgba(0,246,255,.95);
+    box-shadow:0 0 .4vw rgba(0,246,255,.9),0 0 1.3vw rgba(0,246,255,.65),inset 0 0 .7vw rgba(0,246,255,.12);
+  }
+  35%{
+    background:rgba(0,246,255,.07);
+    border-color:#bfffff;
+    color:#efffff;
+    text-shadow:0 0 .22vw rgba(0,246,255,.6);
+    box-shadow:0 0 .24vw rgba(0,246,255,.45),0 0 .7vw rgba(0,246,255,.3);
+  }
+  100%{
+    background:rgba(3,10,14,.76);
+    border-color:rgba(39,239,255,.32);
+    color:rgba(223,252,255,.68);
+    text-shadow:none;
+    box-shadow:inset 0 0 .2vw rgba(0,246,255,.012),0 0 0 rgba(0,246,255,0);
+  }
+}
+
+.select-btn:hover,.detail-btn:hover,
+.select-btn:focus-visible,.detail-btn:focus-visible{
+  border-color:var(--cyan-hot);
+  color:#f5feff;
+  box-shadow:0 0 1.1vw rgba(39,239,255,.16),inset 0 0 1.3vw rgba(39,239,255,.07);
+}
+.select-btn.selected{
+  animation:selectedPulse 1.6s ease-in-out infinite;
+}
+@keyframes selectedPulse{
+  0%,100%{box-shadow:0 0 .7vw rgba(39,239,255,.25)}
+  50%{box-shadow:0 0 1.8vw rgba(39,239,255,.58),inset 0 0 1vw rgba(255,255,255,.08)}
+}
+
+/* DOCK：下部を端末コンソール化 */
+.vote-dock-inner{
+  position:relative;
+  overflow:hidden;
+  box-shadow:
+    inset 0 0 1.8vw rgba(39,239,255,.045),
+    0 -0.6vw 2vw rgba(0,0,0,.45),
+    0 0 1.2vw rgba(39,239,255,.07);
+}
+.vote-dock-inner::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-25%;
+  width:20%;
+  height:100%;
+  background:linear-gradient(90deg,transparent,rgba(39,239,255,.15),transparent);
+  transform:skewX(-20deg);
+  animation:dockSweep 5s linear infinite;
+  pointer-events:none;
+}
+@keyframes dockSweep{
+  from{left:-25%}
+  to{left:125%}
+}
+.vote-button{
+  position:relative;
+  overflow:hidden;
+  text-shadow:0 0 .55vw rgba(39,239,255,.45);
+  transition:box-shadow .2s ease,transform .2s ease;
+}
+.vote-button:not(:disabled){
+  animation:voteReady 2.2s ease-in-out infinite;
+}
+@keyframes voteReady{
+  0%,100%{box-shadow:0 0 .8vw rgba(39,239,255,.16)}
+  50%{box-shadow:0 0 1.8vw rgba(39,239,255,.42),0 0 3vw rgba(39,239,255,.10)}
+}
+
+/* スマホのタップ時にも「反応」が見える */
+.work-card:active{filter:brightness(1.08)}
+button:active{transform:scale(.985)}
+
+/* モーション低減設定では点滅・走査だけ止める */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+
+/* =========================================================
+   FULL CYBERPUNK EFFECT LIBRARY
+   既存レイアウト比率は変更しない
+   画像素材は追加しない / CSSエフェクトのみ
+========================================================= */
+
+:root{
+  --cyan-white:#dffcff;
+  --cyan-electric:#00f6ff;
+  --cyan-deep:#007e8b;
+  --violet:#8b5cff;
+  --pink:#ff2bb5;
+  --glitch:rgba(255,43,181,.55);
+}
+
+/* ---------- GLOBAL CRT / NOISE ---------- */
+body::after{
+  background:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0,rgba(255,255,255,.012) .06vw,transparent .06vw,transparent .32vw),
+    linear-gradient(90deg,transparent 0,rgba(0,246,255,.025) 49.7%,rgba(0,246,255,.08) 50%,rgba(0,246,255,.025) 50.3%,transparent 100%),
+    linear-gradient(180deg,transparent 0,rgba(0,246,255,.025) 49.7%,rgba(0,246,255,.075) 50%,rgba(0,246,255,.025) 50.3%,transparent 100%);
+  opacity:.46;
+  animation:systemPulse 5s ease-in-out infinite,crtDrift 11s linear infinite;
+}
+
+@keyframes crtDrift{
+  0%{background-position:0 0,0 0,0 0}
+  50%{background-position:0 .6vw,0 0,0 0}
+  100%{background-position:0 0,0 0,0 0}
+}
+
+/* ---------- APP SHELL HUD CORNERS ---------- */
+.app-shell{position:relative}
+.app-shell::before,.app-shell::after{
+  content:"";
+  position:fixed;
+  z-index:9996;
+  width:5vw;
+  height:5vw;
+  max-width:5vw;
+  max-height:5vw;
+  pointer-events:none;
+  opacity:.22;
+}
+.app-shell::before{
+  left:.6%;top:18%;
+  border-left:.12vw solid var(--cyan);
+  border-top:.12vw solid var(--cyan);
+  box-shadow:-.4vw -.4vw 1.2vw rgba(39,239,255,.15);
+}
+.app-shell::after{
+  right:.6%;bottom:8%;
+  border-right:.12vw solid var(--cyan);
+  border-bottom:.12vw solid var(--cyan);
+  box-shadow:.4vw .4vw 1.2vw rgba(39,239,255,.15);
+}
+
+/* ---------- HEADER GLITCH / SCAN ---------- */
+.app-header h1{
+  position:relative;
+  text-shadow:
+    .08vw 0 rgba(0,246,255,.22),
+    -.06vw 0 rgba(255,43,181,.14),
+    0 0 1.2vw rgba(39,239,255,.16);
+  animation:headingFlicker 7s steps(1,end) infinite;
+}
+.app-header h1::after{
+  content:"";
+  position:absolute;
+  left:0;
+  top:12%;
+  width:36%;
+  height:8%;
+  background:linear-gradient(90deg,transparent,var(--cyan-electric),transparent);
+  opacity:.24;
+  filter:blur(.12vw);
+  animation:titleScan 4.5s linear infinite;
+  pointer-events:none;
+}
+@keyframes titleScan{
+  0%{transform:translateX(-10%);opacity:0}
+  15%{opacity:.5}
+  55%{opacity:.2}
+  100%{transform:translateX(210%);opacity:0}
+}
+@keyframes headingFlicker{
+  0%,92%,100%{opacity:1}
+  93%{opacity:.82}
+  94%{opacity:1}
+  96%{opacity:.94}
+}
+
+.header-topline::before{
+  content:"SYS-03 // SECURE CHANNEL";
+  color:rgba(39,239,255,.25);
+  margin-right:1.5vw;
+}
+
+/* ---------- CONSOLE HUD ---------- */
+.selection-console::before{
+  content:"01 10 01 001 // VOTE NODE // ONLINE";
+  position:absolute;
+  z-index:4;
+  left:1.2%;
+  bottom:5%;
+  font:500 .52vw/1 Montserrat,sans-serif;
+  letter-spacing:0.16vw;
+  color:rgba(39,239,255,.22);
+  pointer-events:none;
+}
+.selection-console::after{
+  content:"SYS // LIVE // LINK STABLE";
+  animation:statusFlicker 3.8s steps(1,end) infinite;
+}
+@keyframes statusFlicker{
+  0%,88%,100%{opacity:1}
+  89%{opacity:.25}
+  90%{opacity:1}
+}
+
+/* ---------- CARD DIGITAL CIRCUITS ---------- */
+.work-card::before{
+  background:
+    linear-gradient(90deg,transparent 0,transparent 74%,rgba(39,239,255,.045) 74.1%,transparent 74.3%),
+    linear-gradient(180deg,transparent 0,transparent 51%,rgba(39,239,255,.10) 50.8%,transparent 51.2%),
+    repeating-linear-gradient(180deg,transparent 0,transparent 1.2%,rgba(39,239,255,.018) 1.25%,transparent 1.45%);
+  background-size:100% 100%,100% 220%,100% 100%;
+  animation:cardScan 6s linear infinite,cardCircuit 8s steps(1,end) infinite;
+}
+@keyframes cardCircuit{
+  0%,72%,100%{opacity:1}
+  73%{opacity:.72}
+  74%{opacity:1}
+  81%{opacity:.88}
+  82%{opacity:1}
+}
+
+.work-card::after{
+  width:4.2%;
+  height:21%;
+  border-top:.18vw solid var(--cyan-electric);
+  border-right:.18vw solid var(--cyan-electric);
+  filter:drop-shadow(0 0 .5vw rgba(0,246,255,.65));
+}
+
+/* 左下にもコーナーを追加 */
+.work-card .work-number::before{
+  content:"";
+  position:absolute;
+  left:-18%;
+  bottom:-6vw;
+  width:42%;
+  height:3.8vw;
+  border-left:.10vw solid rgba(39,239,255,.22);
+  border-bottom:.10vw solid rgba(39,239,255,.22);
+  opacity:.7;
+}
+
+/* ---------- NUMBER HUD ---------- */
+.work-number{
+  position:relative;
+  text-shadow:
+    0 0 .65vw rgba(39,239,255,.55),
+    .05vw 0 rgba(255,43,181,.18);
+  animation:numberFlicker 6.5s steps(1,end) infinite;
+}
+@keyframes numberFlicker{
+  0%,91%,100%{opacity:1}
+  92%{opacity:.55}
+  93%{opacity:1}
+}
+
+/* ---------- IMAGE HUD / SCAN FRAME ---------- */
+.work-image-wrap::before{
+  background:
+    linear-gradient(90deg,transparent 0,transparent 48.8%,rgba(0,246,255,.10) 50%,transparent 51.2%),
+    linear-gradient(0deg,transparent 0,transparent 48.8%,rgba(0,246,255,.075) 50%,transparent 51.2%),
+    repeating-linear-gradient(0deg,transparent 0,transparent 4.5%,rgba(0,246,255,.035) 4.7%,transparent 4.9%);
+  opacity:.72;
+}
+.work-image-wrap::after{
+  background:
+    linear-gradient(180deg,transparent 0,rgba(0,246,255,.035) 48%,rgba(0,246,255,.11) 50%,rgba(0,246,255,.035) 52%,transparent 100%),
+    linear-gradient(180deg,transparent 78%,rgba(0,0,0,.25));
+  background-size:100% 210%,100% 100%;
+  animation:imageScan 5.2s linear infinite;
+}
+@keyframes imageScan{
+  from{background-position:0 -110%,0 0}
+  to{background-position:0 110%,0 0}
+}
+
+/* ---------- INFO HUD ---------- */
+.data-block::before{
+  content:"";
+  position:absolute;
+  left:-.20vw;
+  top:0;
+  width:.20vw;
+  height:100%;
+  background:linear-gradient(180deg,var(--cyan),transparent 48%,var(--cyan));
+  box-shadow:0 0 1vw rgba(39,239,255,.45);
+  animation:dataPulse 2.8s ease-in-out infinite;
+}
+@keyframes dataPulse{
+  0%,100%{opacity:.55}
+  50%{opacity:1}
+}
+.work-info-top::before{
+  content:"◈ ";
+  color:var(--cyan-electric);
+  text-shadow:0 0 .5vw rgba(39,239,255,.7);
+}
+.work-comment{
+  text-shadow:0 0 .35vw rgba(39,239,255,.06);
+}
+
+/* ---------- ACTION HUD ---------- */
+.work-actions::after{
+  content:"// 0x03";
+  position:absolute;
+  right:5%;
+  bottom:2.5%;
+  font:500 .52vw/1 Montserrat,sans-serif;
+  letter-spacing:0.14vw;
+  color:rgba(39,239,255,.22);
+  pointer-events:none;
+}
+.detail-btn,.select-btn{
+  border-color:rgba(39,239,255,.58);
+  box-shadow:
+    inset 0 0 1.2vw rgba(39,239,255,.035),
+    0 0 .45vw rgba(39,239,255,.035);
+}
+.detail-btn::before,.select-btn::before{
+  background:linear-gradient(90deg,transparent,rgba(0,246,255,.42),rgba(255,43,181,.12),transparent);
+}
+.detail-btn::after{
+  content:"→";
+  animation:arrowBlink 1.7s ease-in-out infinite;
+}
+@keyframes arrowBlink{
+  0%,100%{opacity:.65;transform:translateX(0)}
+  50%{opacity:1;transform:translateX(.25vw)}
+}
+.select-btn.selected{
+  background:linear-gradient(90deg,var(--cyan-electric),#7cfaff);
+  color:#001116;
+  border-color:#bfffff;
+  text-shadow:none;
+  box-shadow:
+    0 0 1.2vw rgba(0,246,255,.6),
+    0 0 2.8vw rgba(0,246,255,.25),
+    inset 0 0 1vw rgba(255,255,255,.28);
+}
+
+/* LOCKED状態を強調 */
+.select-btn:disabled,
+.select-btn[disabled]{
+  background:linear-gradient(90deg,rgba(0,246,255,.16),rgba(0,246,255,.05));
+  border-color:rgba(0,246,255,.55);
+  color:rgba(223,252,255,.8);
+  box-shadow:0 0 1.2vw rgba(0,246,255,.16);
+}
+
+/* ---------- CALLOUT LINE ---------- */
+.callout-path{
+  stroke:rgba(0,246,255,.82);
+  filter:
+    drop-shadow(0 0 .18vw rgba(0,246,255,.75))
+    drop-shadow(0 0 .55vw rgba(0,246,255,.25));
+  stroke-dasharray:2.2vw .65vw;
+  animation:calloutFlow 4s linear infinite;
+}
+@keyframes calloutFlow{
+  to{stroke-dashoffset:-8vw}
+}
+.callout-target{
+  filter:drop-shadow(0 0 .55vw rgba(0,246,255,.7));
+  animation:targetPulse 1.8s ease-in-out infinite;
+}
+.callout-target-core{
+  animation:targetCore 1.8s ease-in-out infinite;
+}
+@keyframes targetPulse{
+  0%,100%{r:1.1}
+  50%{r:1.55}
+}
+@keyframes targetCore{
+  0%,100%{opacity:.7}
+  50%{opacity:1}
+}
+
+/* ---------- HOVER / TOUCH RESPONSE ---------- */
+.work-card:hover{
+  transform:translateY(-.08vw);
+}
+.work-card:hover .work-image-wrap{
+  border-color:rgba(0,246,255,.82);
+  box-shadow:inset 0 0 2vw rgba(0,246,255,.09),0 0 1vw rgba(0,246,255,.10);
+}
+.work-card:hover .work-title{
+  text-shadow:0 0 .8vw rgba(0,246,255,.18);
+}
+.work-card:active{
+  transform:translateY(0);
+  filter:brightness(1.14);
+}
+
+/* ---------- VOTE DOCK: FULL TERMINAL ---------- */
+.vote-dock{
+  box-shadow:0 -1.5vw 4vw rgba(0,0,0,.6);
+}
+.vote-dock-inner::after{
+  content:"UPLINK // READY";
+  position:absolute;
+  left:1%;
+  top:4%;
+  font:500 .48vw/1 Montserrat,sans-serif;
+  letter-spacing:0.18vw;
+  color:rgba(39,239,255,.24);
+  pointer-events:none;
+}
+.vote-button:not(:disabled){
+  background:linear-gradient(90deg,var(--cyan-electric),#65f8ff);
+  border-color:#c5ffff;
+  color:#001116;
+  text-shadow:none;
+  box-shadow:
+    0 0 1.4vw rgba(0,246,255,.55),
+    0 0 3vw rgba(0,246,255,.22),
+    inset 0 0 1vw rgba(255,255,255,.22);
+}
+.vote-button:not(:disabled)::after{
+  content:"→";
+  margin-left:0.6vw;
+  font-size:1.1vw;
+}
+
+/* ---------- MODAL HUD ---------- */
+.modal-dialog{
+  background:
+    linear-gradient(90deg,rgba(0,246,255,.035),transparent 45%,rgba(255,43,181,.025)),
+    var(--panel);
+  box-shadow:
+    0 0 3vw rgba(0,246,255,.14),
+    inset 0 0 2vw rgba(0,246,255,.035);
+}
+.modal-dialog::before,.modal-dialog::after{
+  content:"";
+  position:absolute;
+  width:6%;
+  height:6%;
+  border-color:var(--cyan-electric);
+  border-style:solid;
+  pointer-events:none;
+}
+.modal-dialog::before{left:-.12vw;top:-.12vw;border-width:.18vw 0 0 .18vw}
+.modal-dialog::after{right:-.12vw;bottom:-.12vw;border-width:0 .18vw .18vw 0}
+
+/* ---------- RANDOM MICRO FLICKER ---------- */
+.work-card:nth-child(4n+1){animation:microFlicker 9s steps(1,end) infinite}
+.work-card:nth-child(4n+2){animation-delay:1.3s}
+.work-card:nth-child(4n+3){animation-delay:3.1s}
+.work-card:nth-child(4n){animation-delay:5.2s}
+@keyframes microFlicker{
+  0%,94%,100%{opacity:1}
+  95%{opacity:.97}
+  96%{opacity:1}
+}
+
+/* ---------- ACCESSIBILITY / REDUCED MOTION ---------- */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+
+
+/* =========================================================
+   BUTTON PULSE REWORK
+   常時発光ではなく「強発光 → 減衰 → 待機」を繰り返す
+========================================================= */
+.detail-btn,.select-btn{
+  background:rgba(3,10,14,.76);
+  border-color:rgba(39,239,255,.38);
+  color:rgba(223,252,255,.78);
+  text-shadow:0 0 .15vw rgba(39,239,255,.18);
+  box-shadow:inset 0 0 1vw rgba(39,239,255,.018);
+  animation:buttonIgnite 3.4s ease-out infinite;
+}
+
+.detail-btn::before,.select-btn::before{
+  animation:none;
+  opacity:0;
+}
+
+@keyframes buttonIgnite{
+  0%{
+    border-color:rgba(0,246,255,.38);
+    color:rgba(223,252,255,.72);
+    text-shadow:0 0 .12vw rgba(0,246,255,.12);
+    box-shadow:inset 0 0 1vw rgba(0,246,255,.015),0 0 0 rgba(0,246,255,0);
+  }
+  4%{
+    border-color:#dfffff;
+    color:#ffffff;
+    text-shadow:0 0 .35vw #dfffff,0 0 .8vw rgba(0,246,255,.95),0 0 1.6vw rgba(0,246,255,.72);
+    box-shadow:0 0 .35vw rgba(0,246,255,.95),0 0 1.2vw rgba(0,246,255,.78),inset 0 0 .7vw rgba(0,246,255,.18);
+  }
+  10%{
+    border-color:#8fffff;
+    color:#f7ffff;
+    text-shadow:0 0 .25vw #dfffff,0 0 .65vw rgba(0,246,255,.8),0 0 1.3vw rgba(0,246,255,.5);
+    box-shadow:0 0 .25vw rgba(0,246,255,.82),0 0 .85vw rgba(0,246,255,.55),inset 0 0 .55vw rgba(0,246,255,.12);
+  }
+  22%{
+    border-color:rgba(0,246,255,.62);
+    color:#dffcff;
+    text-shadow:0 0 .18vw rgba(0,246,255,.42),0 0 .45vw rgba(0,246,255,.24);
+    box-shadow:0 0 .35vw rgba(0,246,255,.28),inset 0 0 .4vw rgba(0,246,255,.05);
+  }
+  40%{
+    border-color:rgba(0,246,255,.46);
+    color:rgba(223,252,255,.86);
+    text-shadow:0 0 .14vw rgba(0,246,255,.22);
+    box-shadow:0 0 .18vw rgba(0,246,255,.10),inset 0 0 .25vw rgba(0,246,255,.025);
+  }
+  70%,100%{
+    border-color:rgba(0,246,255,.32);
+    color:rgba(223,252,255,.68);
+    text-shadow:none;
+    box-shadow:inset 0 0 .2vw rgba(0,246,255,.012),0 0 0 rgba(0,246,255,0);
+  }
+}
+
+/* SELECT / DETAIL は同時に光らせず、少しだけ時間をずらす */
+.select-btn{animation-delay:.55s}
+.detail-btn{animation-delay:1.15s}
+
+/* 選択済みだけは常時ベタ発光にせず、強い点火を維持 */
+.select-btn.selected{
+  background:rgba(0,246,255,.08);
+  color:#f4ffff;
+  border-color:#9fffff;
+  animation:selectedButtonIgnite 2.8s ease-out infinite;
+}
+@keyframes selectedButtonIgnite{
+  0%,100%{
+    background:rgba(0,246,255,.06);
+    border-color:rgba(0,246,255,.58);
+    color:#eaffff;
+    text-shadow:0 0 .18vw rgba(0,246,255,.3);
+    box-shadow:0 0 .2vw rgba(0,246,255,.08);
+  }
+  5%{
+    background:rgba(0,246,255,.13);
+    border-color:#ffffff;
+    color:#ffffff;
+    text-shadow:0 0 .4vw #fff,0 0 1vw rgba(0,246,255,1),0 0 2vw rgba(0,246,255,.7);
+    box-shadow:0 0 .4vw #00f6ff,0 0 1.5vw rgba(0,246,255,.9),inset 0 0 .8vw rgba(0,246,255,.15);
+  }
+  14%{
+    background:rgba(0,246,255,.09);
+    border-color:#9fffff;
+    text-shadow:0 0 .25vw #fff,0 0 .7vw rgba(0,246,255,.65);
+    box-shadow:0 0 .25vw rgba(0,246,255,.7),0 0 1vw rgba(0,246,255,.45);
+  }
+  30%{
+    background:rgba(0,246,255,.06);
+    border-color:rgba(0,246,255,.65);
+    text-shadow:0 0 .2vw rgba(0,246,255,.3);
+    box-shadow:0 0 .25vw rgba(0,246,255,.18);
+  }
+  55%{border-color:rgba(0,246,255,.45);text-shadow:none;box-shadow:none}
+}
+
+/* LOCKEDも面発光ではなく輪郭だけを強く点火 */
+.select-btn:disabled,.select-btn[disabled]{
+  background:rgba(0,246,255,.025);
+  border-color:rgba(0,246,255,.34);
+  color:rgba(223,252,255,.68);
+  animation:buttonIgnite 3.8s ease-out infinite;
+}
+
+/* 最終投票ボタンも同じ思想：面ではなく枠と文字 */
+.vote-button:not(:disabled){
+  background:rgba(0,246,255,.035);
+  border-color:rgba(0,246,255,.48);
+  color:#dffcff;
+  text-shadow:0 0 .15vw rgba(0,246,255,.2);
+  box-shadow:none;
+  animation:voteButtonIgnite 3.6s ease-out infinite;
+}
+@keyframes voteButtonIgnite{
+  0%,100%{border-color:rgba(0,246,255,.4);color:#dffcff;text-shadow:none;box-shadow:none}
+  4%{border-color:#fff;color:#fff;text-shadow:0 0 .4vw #fff,0 0 1vw #00f6ff,0 0 2vw rgba(0,246,255,.75);box-shadow:0 0 .35vw #00f6ff,0 0 1.3vw rgba(0,246,255,.8)}
+  12%{border-color:#9fffff;text-shadow:0 0 .25vw #fff,0 0 .7vw rgba(0,246,255,.7);box-shadow:0 0 .25vw rgba(0,246,255,.7),0 0 .8vw rgba(0,246,255,.4)}
+  28%{border-color:rgba(0,246,255,.62);text-shadow:0 0 .18vw rgba(0,246,255,.3);box-shadow:0 0 .2vw rgba(0,246,255,.16)}
+  50%,100%{border-color:rgba(0,246,255,.35);text-shadow:none;box-shadow:none}
+}
+
+
+/* =========================================================
+   MOTION TRIM / HEADER ONLY
+   カード・画像・HUD・ボタン・投票ドックの常時アニメーション停止
+========================================================= */
+
+.work-card,
+.work-card::before,
+.work-card::after,
+.work-card *,
+.work-image-wrap::before,
+.work-image-wrap::after,
+.image-hud::before,
+.image-hud::after,
+.callout-svg *,
+.vote-dock,
+.vote-dock *,
+.vote-button::before,
+.vote-button::after{
+  animation:none !important;
+}
+
+/* ボタンは常時点滅させず、操作時だけ瞬間的に発光 */
+.detail-btn:hover,
+.select-btn:hover,
+.vote-button:not(:disabled):hover{
+  border-color:#ffffff;
+  color:#ffffff;
+  text-shadow:0 0 1vw #ffffff,0 0 2.2vw var(--cyan);
+  box-shadow:
+    0 0 0 .10vw rgba(255,255,255,.9),
+    0 0 1.2vw var(--cyan),
+    0 0 2.8vw rgba(37,237,245,.55);
+}
+
+.detail-btn:active,
+.select-btn:active,
+.vote-button:not(:disabled):active{
+  border-color:#ffffff;
+  color:#ffffff;
+  text-shadow:0 0 1vw #ffffff,0 0 2.5vw var(--cyan);
+  box-shadow:
+    0 0 0 .12vw #ffffff,
+    0 0 1.8vw #ffffff,
+    0 0 4vw var(--cyan);
+}
+
+/* =========================================================
+   SCREEN-SIZE BASED REDEFINITION
+   すべてのレイアウト基準を端末画面へ統一
+   横方向 = vw / 縦方向 = vh
+========================================================= */
+
+.app-shell{
+  width:100% !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+  padding:3.2462vw 0 0 !important;
+}
+
+.app-header{
+  width:100% !important;
+  height:30.2974vw !important;
+  min-height:0 !important;
+  aspect-ratio:auto !important;
+  padding:3.0297vw 2.3vw 2.3805vw !important;
+  border-width:.10vw !important;
+}
+.app-header::before,.app-header::after{
+  width:2.4vw !important;
+  height:5.1938vw !important;
+  border-width:.18vw !important;
+}
+.header-topline{gap:2vw !important;font-size:.82vw !important}
+.app-header h1{margin-top:2.1641vw !important;font-size:5.05vw !important}
+.header-rule{width:72vw !important;height:.30vw !important;margin-top:2.3805vw !important}
+
+.selection-console{
+  width:100% !important;
+  height:10.8205vw !important;
+  min-height:0 !important;
+  aspect-ratio:auto !important;
+  margin:3.1379vw 0 !important;
+  border-width:.10vw !important;
+}
+.console-left{padding:2.1641vw 2.1vw !important;gap:2.6vw !important}
+.console-label{font-size:2.25vw !important}
+#selected{font-size:1.30vw !important}
+.console-right{gap:1.55vw !important;font-size:1.30vw !important}
+.console-right strong{font-size:3.15vw !important}
+.capacity-dots{gap:1.55vw !important}
+.capacity-dot{width:3.05vw !important;border-width:.10vw !important}
+
+.works-list{
+  width:100% !important;
+  gap:1.4067vw !important;
+}
+
+.work-card{
+  width:100% !important;
+  height:auto !important;
+  min-height:28.1333vw !important;
+  max-height:none !important;
+  grid-template-columns:8% 34% 33% 25% !important;
+  column-gap:0 !important;
+  border-width:.10vw !important;
+}
+
+.work-number{
+  margin:3.0297vw 0 0 1.4vw !important;
+  font-size:2.45vw !important;
+}
+.work-number::after{
+  width:1.5vw !important;
+  height:.18vw !important;
+  margin-top:2.3805vw !important;
+}
+
+.work-image-wrap{
+  width:100% !important;
+  height:23.3723vw !important;
+  min-height:0 !important;
+  aspect-ratio:auto !important;
+  margin-top:0.7574vw !important;
+  margin-bottom:0.7574vw !important;
+  border-width:.10vw !important;
+}
+.work-image{width:100% !important;height:23.3723vw !important}
+
+.work-info{
+  width:100% !important;
+  height:auto !important;
+  min-height:28.1333vw !important;
+  padding:2.1641vw 1.2vw 1.5149vw 0 !important;
+  gap:1.1903vw !important;
+}
+.work-info-top{font-size:1.02vw !important}
+.data-block{padding-left:1.4vw !important;border-left-width:.20vw !important}
+.data-label,.work-author-label,.work-comment-label{font-size:.82vw !important;margin-bottom:0.9738vw !important}
+.work-title{font-size:2.55vw !important}
+.work-author{font-size:1.50vw !important}
+.work-comment{font-size:1.38vw !important;line-height:1.35 !important}
+
+.work-actions{
+  width:100% !important;
+  height:auto !important;
+  min-height:28.1333vw !important;
+  padding:2.1641vw 1vw 1.5149vw 0 !important;
+  gap:1.4067vw !important;
+}
+.work-actions::before{font-size:.55vw !important}
+.detail-btn,.select-btn{
+  width:18.0vw !important;
+  min-height:7.3579vw !important;
+  height:8.0072vw !important;
+  padding:0 1vw !important;
+  border-width:.10vw !important;
+  font-size:1.0vw !important;
+}
+.work-card:nth-child(3n+1) .select-btn{height:6.9251vw !important;min-height:6.9251vw !important}
+.work-card:nth-child(3n+1) .detail-btn{height:6.2759vw !important;min-height:6.2759vw !important}
+.work-card:nth-child(3n+2) .select-btn{height:6.4923vw !important;min-height:6.4923vw !important}
+.work-card:nth-child(3n+2) .detail-btn{height:6.7087vw !important;min-height:6.7087vw !important}
+.work-card:nth-child(3n) .select-btn{height:6.7087vw !important;min-height:6.7087vw !important}
+.work-card:nth-child(3n) .detail-btn{height:6.4923vw !important;min-height:6.4923vw !important}
+
+.callout-svg{width:100% !important;height:100% !important}
+.callout-path{stroke-width:.10vw !important}
+.callout-target{stroke-width:.10vw !important}
+
+.vote-dock{padding:2.1641vw 0 !important}
+.vote-dock-inner{
+  width:100% !important;
+  height:15.1487vw !important;
+  aspect-ratio:auto !important;
+  gap:1.2vw !important;
+  padding:2.1641vw 1vw !important;
+  border-width:.10vw !important;
+}
+.dock-status{font-size:.82vw !important}
+.vote-button{
+  flex-basis:18.3vw !important;
+  width:18.3vw !important;
+  height:10.8205vw !important;
+  padding:0 1vw !important;
+  border-width:.10vw !important;
+  font-size:1.4vw !important;
+}
+
+.modal{padding:6.4923vw 3vw !important}
+.modal-dialog{
+  width:63vw !important;
+  max-width:63vw !important;
+  max-height:194.7692vw !important;
+  padding:6.4923vw 3vw !important;
+  border-width:.10vw !important;
+}
+.modal-close{right:1vw !important;top:2.1641vw !important;width:4vw !important;font-size:3vw !important}
+.modal-work-image-wrap{width:57vw !important;height:97.3846vw !important;aspect-ratio:auto !important}
+.modal-work-image-wrap img{width:57vw !important;height:97.3846vw !important}
+.modal-work-info{padding:4.3282vw .3vw 0 !important}
+.modal-kicker{font-size:.9vw !important}
+.modal-dialog h2{font-size:3vw !important}
+.modal-author{font-size:1.25vw !important}
+.confirm-lead{font-size:1.25vw !important}
+.confirm-mark{width:5vw !important;font-size:3vw !important;border-width:.10vw !important}
+.modal-select{height:10.8205vw !important;aspect-ratio:auto !important;border-width:.10vw !important}
+.modal-actions{height:10.8205vw !important;aspect-ratio:auto !important;gap:1vw !important}
+
+/* ヘッダー以外の常時アニメーションは停止。操作時の反応だけ残す */
+body::after,
+.work-card::before,
+.work-card::after,
+.capacity-dot.active,
+.work-number::after,
+.work-card:nth-child(4n+1),
+.callout-path,
+.callout-target,
+.callout-target-core,
+.vote-dock-inner::before,
+.work-image-wrap::before,
+.work-image-wrap::after{
+  animation:none !important;
+}
+
+/* ヘッダー系の発光だけ維持 */
+.app-header::after,
+.header-rule::after{
+  animation-play-state:running !important;
+}
+
+/* ボタンは常時発光させず、操作時のみ発光 */
+.detail-btn,.select-btn,.vote-button{
+  animation:none !important;
+  transition:box-shadow .25s ease,border-color .25s ease,color .25s ease,background .25s ease !important;
+}
+.detail-btn:hover,.select-btn:hover,.vote-button:not(:disabled):hover,
+.detail-btn:focus-visible,.select-btn:focus-visible,.vote-button:not(:disabled):focus-visible{
+  box-shadow:0 0 1.2vw rgba(39,239,255,.8),0 0 2.8vw rgba(39,239,255,.28) !important;
+  border-color:#bffcff !important;
+  text-shadow:0 0 .8vw rgba(39,239,255,.95) !important;
+}
+
+
+/* =========================================================
+   FINAL SCREEN-BASED SCALE
+   画面幅 = vw / 画面高 = vh / 画面最小辺 = vmin
+   カード基準・コンテナ基準の単位は使用しない
+========================================================= */
+
+.app-shell,.app-header,.selection-console,.works-list,.work-card,.vote-dock-inner{
+  box-sizing:border-box;
+}
+
+/* タイポグラフィも画面基準 */
+.header-topline{font-size:0.82vw !important}
+.app-header h1{font-size:5.05vw !important}
+.console-label{font-size:2.25vw !important}
+#selected{font-size:1.3vw !important}
+.console-right{font-size:1.3vw !important}
+.console-right strong{font-size:3.15vw !important}
+.work-number{font-size:2.45vw !important}
+.work-info-top{font-size:1.15vw !important}
+.data-label,.work-author-label,.work-comment-label{font-size:0.94vw !important}
+.work-title{font-size:2.55vw !important}
+.work-author{font-size:1.65vw !important}
+.work-comment{font-size:1.52vw !important}
+.select-btn,.detail-btn{font-size:1vw !important}
+.dock-status{font-size:0.82vw !important}
+.vote-button{font-size:1.4vw !important}
+
+/* 画面基準のギャップ */
+.works-list{gap:2.9215vw !important}
+.work-image-wrap{margin-top:2.4887vw !important;margin-bottom:2.4887vw !important}
+.work-info{gap:1.8395vw !important}
+.work-actions{gap:1.9477vw !important}
+
+/* エフェクトの常時動作はヘッダー系だけ */
+.work-card,.work-card *,.callout-svg *,.vote-dock,.vote-dock *,
+.capacity-dot.active,.work-number::after,.work-image-wrap::before,.work-image-wrap::after{
+  animation:none !important;
+}
+
+/* ボタンは操作時だけ発光 */
+.detail-btn,.select-btn,.vote-button{
+  animation:none !important;
+  transition:box-shadow .22s ease,border-color .22s ease,color .22s ease,background .22s ease !important;
+}
+
+/* =========================================================
+   FINAL CARD DENSITY
+   画面サイズ基準：カード最低高さを縮小
+========================================================= */
+.works-list{
+  gap:1.4067vw !important;
+}
+.work-card{
+  height:auto !important;
+  min-height:28.1333vw !important;
+  max-height:none !important;
+}
+.work-image-wrap{
+  height:23.3723vw !important;
+  min-height:0 !important;
+  margin-top:0.7574vw !important;
+  margin-bottom:0.7574vw !important;
+}
+.work-image{
+  height:23.3723vw !important;
+}
+.work-info{
+  height:auto !important;
+  min-height:28.1333vw !important;
+  gap:1.1903vw !important;
+}
+.work-actions{
+  height:auto !important;
+  min-height:28.1333vw !important;
+  gap:1.4067vw !important;
+}
+.callout-svg{
+  height:100% !important;
+}
+
+/* =========================================================
+   FINAL CARD / IMAGE SYNC
+   画面高さを基準にカードと画像を同一スケールへ統一
+========================================================= */
+.works-list{
+  gap:1.4067vw;
+}
+
+.work-card{
+  grid-template-columns:8% 34% 33% 20%;
+  column-gap:1.6667%;
+  height:28.1333vw;
+  min-height:28.1333vw;
+  align-items:stretch;
+}
+
+.work-image-wrap{
+  aspect-ratio:auto;
+  width:100%;
+  height:26.6185vw;
+  min-height:26.6185vw;
+  margin-block:0.7574vw;
+  align-self:center;
+}
+
+.work-image{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.work-info,
+.work-actions{
+  height:28.1333vw;
+  min-height:28.1333vw;
+}
+
+.work-info{
+  overflow:hidden;
+}
+
+.work-actions{
+  overflow:hidden;
+}
+
+/* =========================================================
+   COMMENT FLOW — GRID REBUILD
+   4カラムを維持したまま、ACTIONの下へコメントを回す。
+   画面基準: vw / vh / vmin
+========================================================= */
+.work-card{
+  display:grid !important;
+  grid-template-columns:8% 34% 33% 20% !important;
+  grid-template-rows:auto auto !important;
+  column-gap:1.6667% !important;
+  row-gap:0 !important;
+  height:auto !important;
+  min-height:28.1333vw !important;
+  align-items:stretch !important;
+}
+
+.work-number{
+  grid-column:1 !important;
+  grid-row:1 / 3 !important;
+  align-self:start !important;
+}
+
+.work-image-wrap{
+  grid-column:2 !important;
+  grid-row:1 / 3 !important;
+  align-self:stretch !important;
+  width:100% !important;
+  height:auto !important;
+  min-height:0 !important;
+  margin:0.7574vw 0 !important;
+}
+
+.work-image{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+}
+
+.work-info{
+  grid-column:3 !important;
+  grid-row:1 !important;
+  width:auto !important;
+  height:auto !important;
+  min-height:0 !important;
+  padding:2.1641vw 0 0.9738vw 0 !important;
+  overflow:hidden !important;
+  display:flex !important;
+  flex-direction:column !important;
+  gap:0.9738vw !important;
+}
+
+.work-actions{
+  grid-column:4 !important;
+  grid-row:1 !important;
+  position:relative !important;
+  width:auto !important;
+  height:auto !important;
+  min-height:0 !important;
+  margin:0 !important;
+  padding:2.1641vw 1vw 0.9738vw 0 !important;
+  overflow:hidden !important;
+  display:flex !important;
+  flex-direction:column !important;
+  gap:1.4067vw !important;
+  align-items:stretch !important;
+  justify-content:flex-start !important;
+}
+
+.detail-btn,.select-btn{
+  width:100% !important;
+  height:6.8169vw !important;
+  min-height:6.8169vw !important;
+  flex:none !important;
+}
+
+.work-comment-block{
+  grid-column:3 / 5 !important;
+  grid-row:2 !important;
+  width:auto !important;
+  height:auto !important;
+  min-height:0 !important;
+  margin:0 !important;
+  padding:0 1vw 1.5149vw 0 !important;
+  border-left:.20vw solid var(--cyan) !important;
+  overflow:hidden !important;
+}
+
+.work-comment{
+  width:100% !important;
+  max-width:none !important;
+  overflow:hidden !important;
+  white-space:pre-wrap !important;
+  overflow-wrap:anywhere !important;
+}
+
+/* コメントが独立行になるので、情報上段との境界を軽く整理 */
+.work-comment-block .work-comment-label{
+  margin-bottom:0.7574vw !important;
+}
+
+/* =========================================================
+   FINAL IMAGE RATIO FIX
+   画像はカードに追従させつつ、表示領域を4:3に固定
+   ========================================================= */
+.work-card{
+  height:auto !important;
+  min-height:calc(24.48vw + 1.5149vw) !important;
+  grid-template-rows:auto auto !important;
+  align-items:stretch !important;
+}
+
+.work-image-wrap{
+  grid-column:2 !important;
+  grid-row:1 / 3 !important;
+  width:100% !important;
+  height:auto !important;
+  min-height:0 !important;
+  aspect-ratio:4 / 3 !important;
+  margin:0.7574vw 0 !important;
+  align-self:center !important;
+  overflow:hidden !important;
+}
+
+.work-image{
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  aspect-ratio:4 / 3 !important;
+  object-fit:cover !important;
+}
+
+/* FINAL IMAGE 4:3 — definitive override */
+.work-image-wrap{
+  width:34vw !important;
+  height:25.5vw !important;
+  min-height:25.5vw !important;
+  max-height:25.5vw !important;
+  aspect-ratio:4 / 3 !important;
+  margin:0.7574vw 0 !important;
+  align-self:start !important;
+  overflow:hidden !important;
+}
+.work-image{
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  min-height:0 !important;
+  max-height:none !important;
+  aspect-ratio:4 / 3 !important;
+  object-fit:cover !important;
+}
+/* Card must reserve exactly the image's 4:3 height, but may grow for text. */
+.work-card{
+  min-height:calc(25.5vw + 1.5149vw) !important;
+}
+
+/* COMMENT TIGHTEN — コメント欄を上へ詰める */
+.work-info{
+  padding-top:1.1903vw !important;
+  padding-bottom:0.541vw !important;
+  gap:0.541vw !important;
+}
+.work-actions{
+  padding-top:1.1903vw !important;
+  padding-bottom:0.541vw !important;
+  gap:0.9738vw !important;
+}
+.work-comment-block{
+  margin-top:-2.4887vw !important;
+  padding-top:0 !important;
+  padding-bottom:0.9738vw !important;
+}
+.work-comment-block .work-comment-label{
+  margin-bottom:0.4328vw !important;
+}
+
+
+/* FINAL LAYOUT TUNE: first rail narrower + image/info gap expanded */
+.works-list > .work-card{
+  grid-template-columns:6.8vw 32.64vw 33.76vw 19.20vw !important;
+  column-gap:1.20vw !important;
+}
+
+/* IMAGE ↔ INFO only: widen this gap without changing the other column gaps */
+.works-list > .work-card > .work-info{
+  margin-left:.80vw !important;
+  width:calc(100% - .80vw) !important;
+}
+
+
+/* VOTE INTERVAL TREND */
+.vote-trend{
+  width:100%;
+  margin:3.1379vw 0;
+  padding:1.45% 2.1% 1.1%;
+  border:.10vw solid var(--line);
+  background:var(--panel);
+  overflow:hidden;
+}
+.vote-trend-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:3%;
+  min-width:0;
+  margin-bottom:1.2%;
+}
+.vote-trend-kicker{
+  font:500 .78vw/1 Montserrat,sans-serif;
+  letter-spacing:0.18vw;
+  color:var(--muted);
+  white-space:nowrap;
+}
+.vote-trend-head h2{
+  margin:.55% 0 0;
+  font:400 2.15vw/1 Georgia,"Times New Roman",serif;
+  letter-spacing:0.07vw;
+  color:#f1fcff;
+  white-space:nowrap;
+}
+.vote-trend-meta{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:1.2vw;
+  flex:0 0 auto;
+}
+.vote-trend-total{
+  font:600 .78vw/1 Montserrat,sans-serif;
+  letter-spacing:0.14vw;
+  color:#d9e0d1;
+  white-space:nowrap;
+}
+.vote-trend-status{
+  flex:0 0 auto;
+  font:500 .72vw/1 Montserrat,sans-serif;
+  letter-spacing:0.12vw;
+  color:var(--cyan);
+  white-space:nowrap;
+}
+
+
+.trend-grid{
+  stroke:rgba(130,145,120,.10);
+  stroke-width:1;
+  vector-effect:non-scaling-stroke;
+}
+.trend-tick{
+  stroke:rgba(130,145,120,.08);
+  stroke-width:1;
+  vector-effect:non-scaling-stroke;
+}
+.trend-line{
+  fill:none;
+  stroke:#d6dfcf;
+  stroke-width:1.6;
+  vector-effect:non-scaling-stroke;
+}
+.trend-empty{
+  fill:var(--muted);
+  font-family:"Noto Sans JP",sans-serif;
+  font-size:1vw;
+  letter-spacing:0.06vw;
+}
+
+
+/* =========================================================
+   CYBERPUNK JAPANESE TYPE
+========================================================= */
+#selected,
+.work-title,
+.work-author,
+.work-comment,
+.select-btn,
+.detail-btn,
+.vote-button {
+  font-family:"M PLUS 1 Code","Noto Sans JP",sans-serif !important;
+}
+
+/* =========================================================
+   INTELLIGENCE ARCHIVE HEADER / COMPACT TREND
+   トレンドはタイトル直下。装飾は抑制し、情報端末風に統一。
+========================================================= */
+:root{
+  --bg:#070907;
+  --panel:#0a0d0a;
+  --panel2:#0d110d;
+  --cyan:#aab79a;
+  --cyan2:#d1d8c2;
+  --magenta:#8b332e;
+  --text:#e4e7da;
+  --muted:#778071;
+  --muted2:#b3baa8;
+  --line:rgba(170,183,154,.38);
+  --line-soft:rgba(170,183,154,.14);
+  --cyan-electric:#b9c5a4;
+  --cyan-deep:#59634f;
+}
+
+body{
+  background:#070907;
+}
+body::before{
+  opacity:.28;
+  background:repeating-linear-gradient(180deg,transparent 0,transparent 1.1903vw,rgba(170,183,154,.012) 1.5149vw);
+}
+
+.app-header{
+  height:47.6103vw !important;
+  aspect-ratio:auto !important;
+  padding:2.4887vw 2.2vw 1.7313vw !important;
+  background:#090c09 !important;
+  box-shadow:inset 0 0 0 .06vw rgba(170,183,154,.08) !important;
+}
+.app-header h1{
+  margin-top:1.5149vw !important;
+  font-size:4.8vw !important;
+  color:#e7eadf !important;
+  text-shadow:none !important;
+  letter-spacing:0.03vw !important;
+}
+.header-topline{
+  color:#747d70 !important;
+  letter-spacing:0.13vw !important;
+}
+.header-feed b{color:#b6c29e !important}
+.header-rule{
+  width:100% !important;
+  height:0.1731vw !important;
+  margin-top:1.4067vw !important;
+  background:rgba(170,183,154,.30) !important;
+  box-shadow:none !important;
+}
+
+.vote-trend{
+  width:100% !important;
+  margin:1.5149vw 0 0 !important;
+  padding:0.9738vw 0 0 !important;
+  border:0 !important;
+  border-top:0.1298vw solid rgba(170,183,154,.20) !important;
+  background:transparent !important;
+  box-shadow:none !important;
+}
+.vote-trend-head{
+  height:5.1938vw !important;
+  margin:0 !important;
+  align-items:center !important;
+}
+.vote-trend-kicker{
+  color:#697264 !important;
+  font-family:Montserrat,sans-serif !important;
+  font-size:0.72vw !important;
+  letter-spacing:0.18vw !important;
+}
+.vote-trend-head h2{
+  margin:0.3246vw 0 0 !important;
+  font-family:Montserrat,sans-serif !important;
+  font-size:1.55vw !important;
+  font-weight:500 !important;
+  letter-spacing:0.12vw !important;
+  color:#cbd1c1 !important;
+}
+.vote-trend-status{
+  color:#8d997d !important;
+  font-size:0.68vw !important;
+  letter-spacing:0.12vw !important;
+}
+
+
+.trend-grid{
+  stroke:rgba(170,183,154,.13) !important;
+}
+.trend-tick{
+  stroke:rgba(170,183,154,.20) !important;
+}
+.trend-line{
+  stroke:#c0c9ac !important;
+  stroke-width:1.15 !important;
+}
+.trend-point circle{
+  fill:#090c09 !important;
+  stroke:#c0c9ac !important;
+  stroke-width:1.25 !important;
+}
+.trend-empty{fill:#697264 !important;font-size:0.75vw !important}
+
+/* CLASSIFIED-style restraint: no glow on the header/trend */
+.app-header::before,.app-header::after{
+  border-color:rgba(170,183,154,.52) !important;
+  box-shadow:none !important;
+}
+.app-header::after{animation:none !important}
+
+
+/* =========================================================
+   CIA / CLASSIFIED VISUAL PASS
+   見た目のみ。JS・GS・投票ロジックは変更しない。
+   トレンドはARTWORK INDEX直下のバナー内部に収める。
+========================================================= */
+:root{
+  --cia-bg:#070907;
+  --cia-panel:#090c09;
+  --cia-ink:#d9ddd0;
+  --cia-muted:#747b70;
+  --cia-line:rgba(170,183,154,.30);
+  --cia-line-soft:rgba(170,183,154,.12);
+  --cia-olive:#aab79a;
+  --cia-red:#9b4a42;
+}
+
+/* 全体：ネオン／CRT感を切る */
+html,body{
+  background:var(--cia-bg) !important;
+}
+body::before,
+body::after{
+  display:none !important;
+}
+
+.app-shell{
+  padding-top:2.3805vw !important;
+}
+
+/* ── 上部バナー ── */
+.app-header{
+  height:auto !important;
+  min-height:0 !important;
+  aspect-ratio:auto !important;
+  overflow:hidden !important;
+  padding:2.1641vw 2.0vw 1.8395vw !important;
+  background:var(--cia-panel) !important;
+  border:.08vw solid var(--cia-line) !important;
+  box-shadow:none !important;
+}
+
+.app-header::before,
+.app-header::after{
+  width:2.0vw !important;
+  height:3.8954vw !important;
+  border-color:rgba(170,183,154,.55) !important;
+  box-shadow:none !important;
+  animation:none !important;
+}
+
+.header-topline{
+  font-size:.68vw !important;
+  letter-spacing:0.16vw !important;
+  color:#687066 !important;
+}
+.header-topline::before{
+  content:"SECURE CHANNEL // CLASSIFIED" !important;
+  color:rgba(155,74,66,.68) !important;
+  margin-right:1.2vw !important;
+}
+.header-feed b{
+  color:var(--cia-olive) !important;
+}
+
+.app-header h1{
+  margin:1.1903vw 0 0 !important;
+  font-family:Georgia,"Times New Roman",serif !important;
+  font-size:4.45vw !important;
+  line-height:1 !important;
+  font-weight:400 !important;
+  letter-spacing:0.02vw !important;
+  color:var(--cia-ink) !important;
+  text-shadow:none !important;
+  animation:none !important;
+}
+.app-header h1::after{
+  display:none !important;
+}
+
+.header-rule{
+  width:100% !important;
+  height:0.1298vw !important;
+  margin-top:1.4067vw !important;
+  background:rgba(170,183,154,.22) !important;
+  box-shadow:none !important;
+}
+
+/* ── トレンド：タイトル直下、バナー内に統合 ── */
+.vote-trend{
+  position:relative !important;
+  width:100% !important;
+  margin:1.1903vw 0 0 !important;
+  padding:1.1903vw 0 0 !important;
+  border:0 !important;
+  border-top:0.1082vw solid var(--cia-line-soft) !important;
+  background:transparent !important;
+  box-shadow:none !important;
+}
+.vote-trend::after{
+  content:"CLASSIFIED // EYES ONLY";
+  position:absolute;
+  right:0;
+  top:0.9089vw;
+  color:rgba(155,74,66,.60);
+  font:500 0.58vw/1 Montserrat,sans-serif;
+  letter-spacing:0.16vw;
+  pointer-events:none;
+}
+.vote-trend-head{
+  height:auto !important;
+  min-height:0 !important;
+  margin:0 !important;
+  align-items:center !important;
+}
+.vote-trend-kicker{
+  color:#697166 !important;
+  font-size:0.62vw !important;
+  letter-spacing:0.16vw !important;
+}
+.vote-trend-head h2{
+  margin:0.2597vw 0 0 !important;
+  font-family:Montserrat,sans-serif !important;
+  font-size:1.45vw !important;
+  line-height:1 !important;
+  font-weight:500 !important;
+  letter-spacing:0.14vw !important;
+  color:#c8cdbf !important;
+}
+.vote-trend-status{
+  color:#8d9870 !important;
+  font-size:0.6vw !important;
+  letter-spacing:0.1vw !important;
+}
+
+
+.trend-grid{
+  stroke:rgba(170,183,154,.10) !important;
+}
+.trend-tick{
+  stroke:rgba(170,183,154,.15) !important;
+}
+.trend-line{
+  stroke:#b7c0a5 !important;
+  stroke-width:.65 !important;
+}
+.trend-point circle{
+  fill:#090c09 !important;
+  stroke:#b7c0a5 !important;
+  stroke-width:1.05 !important;
+}
+.trend-empty{
+  fill:#626a60 !important;
+  font-size:0.68vw !important;
+}
+
+/* 既存サイバー系の動きを停止 */
+.app-shell::before,
+.app-shell::after,
+.selection-console::before,
+.selection-console::after,
+.work-card::before,
+.work-card::after,
+.work-number,
+.work-image-wrap::before,
+.work-image-wrap::after{
+  animation:none !important;
+}
+
+/* バナー以外は従来レイアウトを維持 */
+.selection-console{
+  margin-top:2.1641vw !important;
+}
+
+/* =========================================================
+   LOCK → SELECT : 解除時のリターン・エフェクト
+   既存の選択状態を変更せず、解除した瞬間だけ点火
+========================================================= */
+.work-card.unlock-return .select-btn{
+  position:relative;
+  z-index:3;
+  animation:unlockReturnIgnite .72s cubic-bezier(.16,.8,.22,1) both !important;
+}
+
+.work-card.unlock-return .select-btn::after{
+  content:"";
+  position:absolute;
+  inset:-.18vw;
+  border:.08vw solid rgba(255,255,255,.95);
+  box-shadow:
+    0 0 .35vw rgba(255,255,255,.85),
+    0 0 1.1vw rgba(0,246,255,.85),
+    0 0 2.2vw rgba(0,246,255,.38);
+  opacity:0;
+  pointer-events:none;
+  animation:unlockReturnFrame .72s cubic-bezier(.16,.8,.22,1) both;
+}
+
+@keyframes unlockReturnIgnite{
+  0%{
+    background:rgba(0,246,255,.16);
+    border-color:#fff;
+    color:#fff;
+    text-shadow:0 0 .4vw #fff,0 0 1.2vw #00f6ff;
+    box-shadow:0 0 .4vw #00f6ff,0 0 1.5vw rgba(0,246,255,.9),inset 0 0 .7vw rgba(0,246,255,.18);
+  }
+  18%{
+    background:rgba(0,246,255,.10);
+    border-color:#bfffff;
+    color:#f4ffff;
+    text-shadow:0 0 .25vw #fff,0 0 .8vw rgba(0,246,255,.75);
+    box-shadow:0 0 .3vw rgba(0,246,255,.7),0 0 1vw rgba(0,246,255,.5);
+  }
+  48%{
+    background:rgba(0,246,255,.045);
+    border-color:rgba(0,246,255,.62);
+    color:#dffcff;
+    text-shadow:0 0 .12vw rgba(0,246,255,.35);
+    box-shadow:0 0 .18vw rgba(0,246,255,.2);
+  }
+  100%{
+    background:rgba(0,246,255,.02);
+    border-color:rgba(0,246,255,.34);
+    color:rgba(223,252,255,.68);
+    text-shadow:none;
+    box-shadow:none;
+  }
+}
+
+@keyframes unlockReturnFrame{
+  0%{opacity:1;transform:scale(1)}
+  32%{opacity:.95;transform:scale(1.015)}
+  100%{opacity:0;transform:scale(1.045)}
+}
+
+
+/* =========================================================
+   TOUCH DEVICE : TAP後に残る :hover を無効化
+   LOCK → SELECT の見た目を、その場で確実に通常状態へ戻す
+========================================================= */
+@media (hover:none) and (pointer:coarse){
+  .select-btn:not(.selected):hover,
+  .select-btn:not(.selected):focus,
+  .select-btn:not(.selected):focus-visible{
+    border-color:rgba(39,239,255,.32) !important;
+    color:rgba(223,252,255,.68) !important;
+    text-shadow:none !important;
+    box-shadow:inset 0 0 .2vw rgba(0,246,255,.012),0 0 0 rgba(0,246,255,0) !important;
+    background:rgba(0,246,255,.02) !important;
+  }
+}
+
+/* PINCH STABILITY TEST: disable only full-screen decorative fixed layers */
+body::before, body::after, .app-shell::before, .app-shell::after { display:none !important; animation:none !important; }
+
+
+/* PINCH TEST: EFFECTS OFF */
+*, *::before, *::after {
+  animation: none !important;
+  transition: none !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  transform: none !important;
+  mix-blend-mode: normal !important;
+}
+
+/* =========================================================
+   EFFECT SOFT : CIA / ANALYSIS TERMINAL
+   安定性を優先し、静的な光と輪郭だけ戻す
+   animation / filter / backdrop-filter は戻さない
+========================================================= */
+
+/* 投票ドック：fixedを使わず、ズーム後のViewportずれを回避 */
+.vote-dock{
+  position:static !important;
+  left:auto !important;
+  bottom:auto !important;
+  z-index:50 !important;
+  width:100% !important;
+  background:linear-gradient(180deg,rgba(3,7,10,0),rgba(3,7,10,.94) 38%) !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+.vote-dock-inner{
+  box-shadow:0 0 1.4vw rgba(39,239,255,.08), inset 0 0 1vw rgba(39,239,255,.025) !important;
+}
+
+/* ヘッダー：細いシアンの発光だけ */
+.app-header{
+  box-shadow:inset 0 0 0 .10vw rgba(39,239,255,.07), 0 0 1.2vw rgba(39,239,255,.05) !important;
+}
+
+.header-rule{
+  box-shadow:0 0 0.8vw rgba(39,239,255,.28) !important;
+}
+
+.app-header h1{
+  text-shadow:0 0 0.7vw rgba(39,239,255,.18) !important;
+}
+
+/* 選択コンソール：パネルの縁だけ光らせる */
+.selection-console{
+  box-shadow:inset 0 0 1vw rgba(39,239,255,.025), 0 0 0.8vw rgba(39,239,255,.035) !important;
+}
+
+.capacity-dot.active{
+  box-shadow:0 0 0.7vw rgba(39,239,255,.45) !important;
+}
+
+/* 作品カード：画像枠と外周だけ */
+.work-card{
+  box-shadow:inset 0 0 0 .10vw rgba(39,239,255,.035), 0 0 1.1vw rgba(39,239,255,.035) !important;
+}
+
+.work-image-wrap{
+  box-shadow:inset 0 0 1vw rgba(39,239,255,.035) !important;
+}
+
+/* ターゲットと引き込み線：静的な発光 */
+.callout-target{
+  box-shadow:0 0 0.65vw rgba(39,239,255,.28) !important;
+}
+
+.callout-path{
+  filter:drop-shadow(0 0 0.18vw rgba(39,239,255,.18)) !important;
+}
+
+/* SELECT / DETAIL：静かなホバー・選択反応だけ */
+.select-btn,
+.detail-btn,
+.vote-button{
+  transition:background-color .16s ease,border-color .16s ease,box-shadow .16s ease,color .16s ease !important;
+}
+
+.select-btn.selected{
+  box-shadow:0 0 0.9vw rgba(39,239,255,.20) !important;
+}
+
+.detail-btn:hover,
+.select-btn:hover:not(.selected),
+.vote-button:not(:disabled):hover{
+  box-shadow:0 0 0.65vw rgba(39,239,255,.16) !important;
+}
+
+.vote-button:not(:disabled){
+  box-shadow:0 0 0.8vw rgba(39,239,255,.13) !important;
+}
+
+/* CIA端末らしい静的なコーナー感 */
+.app-header::before,
+.app-header::after,
+.work-card::before,
+.work-card::after{
+  box-shadow:0 0 0.45vw rgba(39,239,255,.18) !important;
+}
+
+/* ピンチ安定性：全面レイヤーと重い描画効果は引き続き停止 */
+body::before,
+body::after,
+.app-shell::before,
+.app-shell::after{
+  display:none !important;
+  animation:none !important;
+}
+
+*,*::before,*::after{
+  animation:none !important;
+  transform:none !important;
+  mix-blend-mode:normal !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+
+/* =========================================================
+   VOTED SCREEN MASK
+   Cyberpunk / ultra-thin typography / aggressive glitch
+========================================================= */
+.voted-mask{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  overflow:hidden;
+  background:#020508;
+  color:#fff;
+  isolation:isolate;
+}
+
+.voted-mask[hidden]{display:none !important;}
+
+.voted-mask-image{
+  position:absolute;
+  inset:0;
+  z-index:-3;
+  background-image:url('./voted-cyberpunk.webp');
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+  filter:brightness(.68) contrast(1.06) saturate(.78);
+  transform:scale(1.01);
+}
+
+.voted-mask-overlay{
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  background:linear-gradient(180deg,rgba(0,0,0,.48),rgba(0,0,0,.66));
+  pointer-events:none;
+}
+
+.voted-mask-overlay::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:repeating-linear-gradient(to bottom,transparent 0,transparent 0.7692vw,rgba(255,255,255,.035) 1.0256vw);
+  opacity:.28;
+}
+
+.voted-mask-content{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:10.8205vw 5vw;
+  pointer-events:none;
+}
+
+ .voted-mask-check{
+  position:relative;
+  width:clamp(28.7179vw,24vw,56.4103vw);
+  height:clamp(28.7179vw,24vw,56.4103vw);
+  border:0.2564vw solid rgba(220,255,255,.88);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  margin-bottom:6.4923vw;
+  color:rgba(240,255,255,.98);
+  font-family:"M PLUS 1",sans-serif;
+  font-size:clamp(18.4615vw,15vw,39.7436vw);
+  font-weight:100;
+  font-variation-settings:"wght" 100;
+  line-height:1;
+  text-shadow:0 0 1.2821vw rgba(190,255,255,.95),0 0 5.641vw rgba(0,230,255,.38);
+  animation:checkGlitch 1.15s steps(1,end) infinite;
+}
+
+.voted-mask-check span{
+  display:block;
+  transform:translateY(-2%);
+}
+
+.voted-mask-check::before,
+.voted-mask-check::after{
+  content:"✓";
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  pointer-events:none;
+  opacity:0;
+  font-family:"M PLUS 1",sans-serif;
+  font-size:inherit;
+  font-weight:100;
+  line-height:1;
+}
+
+.voted-mask-check::before{
+  color:#00ffff;
+  text-shadow:-1.7949vw 0 #00ffff,0 0 2.0513vw #00ffff;
+  animation:checkGlitchCyan 1.15s steps(1,end) infinite;
+}
+
+.voted-mask-check::after{
+  color:#ff286e;
+  text-shadow:1.7949vw 0 #ff286e,0 0 2.0513vw #ff286e;
+  animation:checkGlitchRed 1.15s steps(1,end) infinite;
+}
+
+.voted-mask-kicker,
+.voted-mask-title,
+.voted-mask-subtitle,
+.voted-mask-status,
+.voted-mask-footer{
+  position:relative;
+  text-shadow:0 0 1.0256vw rgba(150,255,255,.48),0 0 3.5897vw rgba(0,220,255,.12);
+}
+
+.voted-mask-kicker{
+  color:rgba(205,255,255,.74);
+  font:100 clamp(2.3077vw,1.15vw,3.8462vw)/1.4 'M PLUS 1 Code',monospace;
+  letter-spacing:.34em;
+  margin-bottom:5.4103vw;
+}
+
+.voted-mask-title{
+  color:rgba(248,255,255,.97);
+  font-family:"M PLUS 1","Noto Sans JP",sans-serif;
+  font-size:clamp(7.1795vw,6vw,18.4615vw);
+  font-weight:100;
+  font-variation-settings:"wght" 100;
+  line-height:1.15;
+  letter-spacing:.28em;
+  white-space:nowrap;
+  animation:votedTitleFlicker .95s steps(1,end) infinite;
+}
+
+.voted-mask-subtitle{
+  margin-top:4.761vw;
+  color:rgba(205,255,255,.64);
+  font:100 clamp(2.0513vw,1.05vw,3.5897vw)/1.7 'M PLUS 1 Code',monospace;
+  letter-spacing:.18em;
+  max-width:90vw;
+}
+
+.voted-mask-status{
+  margin-top:8.6564vw;
+  color:rgba(170,245,255,.46);
+  font:100 clamp(1.7949vw,.82vw,2.8205vw)/2.05 'M PLUS 1 Code',monospace;
+  letter-spacing:.19em;
+}
+
+.voted-mask-footer{
+  margin-top:6.4923vw;
+  color:rgba(255,255,255,.28);
+  font:100 clamp(1.5385vw,.7vw,2.3077vw)/1.6 'M PLUS 1 Code',monospace;
+  letter-spacing:.22em;
+}
+
+.voted-mask-kicker::before,
+.voted-mask-kicker::after,
+.voted-mask-title::before,
+.voted-mask-title::after,
+.voted-mask-subtitle::before,
+.voted-mask-subtitle::after{
+  content:attr(data-glitch);
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  opacity:0;
+  white-space:inherit;
+}
+
+.voted-mask-kicker::before,
+.voted-mask-title::before,
+.voted-mask-subtitle::before{
+  color:#00ffff;
+  transform:translateX(-2.0513vw) skewX(-8deg);
+  text-shadow:-1.2821vw 0 #00ffff;
+  animation:votedGlitchA .95s steps(1,end) infinite;
+}
+
+.voted-mask-kicker::after,
+.voted-mask-title::after,
+.voted-mask-subtitle::after{
+  color:#ff286e;
+  transform:translateX(2.0513vw) skewX(8deg);
+  text-shadow:1.2821vw 0 #ff286e;
+  animation:votedGlitchB .95s steps(1,end) infinite;
+}
+
+@keyframes votedGlitchA{
+  0%,46%,100%{opacity:0;clip-path:inset(0 0 100% 0)}
+  47%{opacity:1;clip-path:inset(8% 0 76% 0);transform:translateX(-3.0769vw) skewX(-9deg)}
+  48%{opacity:.2;clip-path:inset(45% 0 38% 0);transform:translateX(3.3333vw)}
+  49%{opacity:1;clip-path:inset(71% 0 12% 0);transform:translateX(-2.3077vw)}
+  50%{opacity:0}
+  67%{opacity:.9;clip-path:inset(27% 0 54% 0);transform:translateX(2.8205vw) skewX(7deg)}
+  68%{opacity:0}
+  83%{opacity:.8;clip-path:inset(58% 0 22% 0);transform:translateX(-3.5897vw)}
+  84%{opacity:0}
+}
+
+@keyframes votedGlitchB{
+  0%,53%,100%{opacity:0;clip-path:inset(100% 0 0 0)}
+  54%{opacity:1;clip-path:inset(15% 0 68% 0);transform:translateX(3.0769vw) skewX(8deg)}
+  55%{opacity:.15;clip-path:inset(52% 0 31% 0);transform:translateX(-3.5897vw)}
+  56%{opacity:1;clip-path:inset(79% 0 7% 0);transform:translateX(2.3077vw)}
+  57%{opacity:0}
+  72%{opacity:.9;clip-path:inset(35% 0 45% 0);transform:translateX(-3.3333vw)}
+  73%{opacity:0}
+  91%{opacity:.75;clip-path:inset(7% 0 82% 0);transform:translateX(3.8462vw)}
+  92%{opacity:0}
+}
+
+@keyframes votedTitleFlicker{
+  0%,45%,51%,66%,69%,82%,85%,100%{filter:none;opacity:1}
+  46%{filter:contrast(2.8) brightness(1.8);opacity:.62;transform:translateX(-0.5128vw)}
+  47%{filter:contrast(3.4) brightness(2);opacity:.88;transform:translateX(0.7692vw)}
+  67%{filter:contrast(2.5) brightness(1.7);opacity:.55;transform:skewX(-2deg)}
+  83%{filter:contrast(3) brightness(1.9);opacity:.68;transform:translateX(-1.0256vw)}
+}
+
+@keyframes checkGlitch{
+  0%,46%,51%,67%,70%,83%,86%,100%{filter:none;opacity:1}
+  47%{filter:contrast(2.8) brightness(1.8);opacity:.7;transform:translateX(-0.7692vw) skewX(-2deg)}
+  48%{filter:contrast(3.5) brightness(2.1);opacity:.9;transform:translateX(1.0256vw)}
+  68%{filter:contrast(3) brightness(1.8);opacity:.6;transform:translateX(0.7692vw)}
+  84%{filter:contrast(3.5) brightness(2);opacity:.72;transform:translateX(-1.2821vw)}
+}
+
+@keyframes checkGlitchCyan{
+  0%,46%,100%{opacity:0}
+  47%{opacity:.95;transform:translateX(-2.3077vw) skewX(-7deg)}
+  48%{opacity:.2;transform:translateX(3.0769vw)}
+  49%{opacity:.9;transform:translateX(-1.7949vw)}
+  50%{opacity:0}
+  68%{opacity:.8;transform:translateX(-3.0769vw)}
+  69%{opacity:0}
+  84%{opacity:.75;transform:translateX(-3.5897vw)}
+  85%{opacity:0}
+}
+
+@keyframes checkGlitchRed{
+  0%,53%,100%{opacity:0}
+  54%{opacity:.95;transform:translateX(2.5641vw) skewX(8deg)}
+  55%{opacity:.2;transform:translateX(-3.3333vw)}
+  56%{opacity:.85;transform:translateX(2.0513vw)}
+  57%{opacity:0}
+  72%{opacity:.8;transform:translateX(3.3333vw)}
+  73%{opacity:0}
+  91%{opacity:.7;transform:translateX(3.8462vw)}
+  92%{opacity:0}
+}
+
+@media (max-width:100vw){
+  .voted-mask-content{padding:8.6564vw 5vw;}
+  .voted-mask-check{
+    width:clamp(23.5897vw,28vw,38.4615vw);
+    height:clamp(23.5897vw,28vw,38.4615vw);
+    font-size:clamp(14.8718vw,18vw,25.641vw);
+    margin-bottom:5.4103vw;
+  }
+  .voted-mask-kicker{letter-spacing:.18em;margin-bottom:4.761vw;}
+  .voted-mask-title{font-size:clamp(6.4103vw,8.8vw,13.3333vw);letter-spacing:.22em;font-weight:100;font-variation-settings:"wght" 100;}
+  .voted-mask-subtitle{max-width:88vw;letter-spacing:.08em;}
+  .voted-mask-status{margin-top:7.5744vw;letter-spacing:.08em;}
+}
+
+
+.detail-btn.is-open{
+  border-color:var(--cyan);
+}
+
+@media (max-width:100vw){
+  .inline-panel-kicker{font-size:1.8vw}
+  .inline-panel h2{font-size:3.4vw}
+  .inline-panel p{font-size:1.9vw}
+  }
+
+/* VOTE DOCK RETIRED: voting action now lives in VOTE STATUS. */
+.vote-dock{display:none!important}
+
+
+/* VOTE STATUS: confirmation/status area is now the full vote button. */
+.selection-console .console-right{
+  justify-content:stretch;
+  gap:0;
+  padding:0;
+}
+.selection-console .console-right .vote-button{
+  flex:1 1 100%;
+  width:100%;
+  height:100%;
+  min-width:0;
+  border:0;
+  margin:0;
+}
+
+
+/* BUTTON SPACING REBALANCE
+   Smaller buttons + larger breathing room on all sides. */
+.work-actions{
+  padding:2.5969vw .9vw 2.1641vw .35vw !important;
+  gap:2.1641vw !important;
+  overflow:visible !important;
+  position:relative !important;
+  z-index:90 !important;
+}
+
+.select-btn{
+  position:relative !important;
+  z-index:100 !important;
+  height:5.9513vw !important;
+  min-height:5.9513vw !important;
+  padding:0 .7vw !important;
+}
+
+.detail-btn{
+  position:relative !important;
+  z-index:100 !important;
+  height:5.9513vw !important;
+  min-height:5.9513vw !important;
+  padding:0 .7vw !important;
+}
+
+
+/* FINAL: keep card height stable when DETAIL/HIDE toggles. */
+.work-card{
+  height:calc(25.5vw + 1.5149vw) !important;
+  min-height:calc(25.5vw + 1.5149vw) !important;
+  max-height:calc(25.5vw + 1.5149vw) !important;
+}
+
+/* DATA STREAM comment area: no box/side frame. */
+.work-comment-block{
+  border:0 !important;
+  border-left:0 !important;
+}
+
+/* Typography step-up: non-title card information and controls */
+.work-info-top{font-size:1.28vw !important}
+.data-label,.work-author-label,.work-comment-label{font-size:1.04vw !important}
+.work-author{font-size:1.9vw !important}
+.work-comment{font-size:1.76vw !important}
+.select-btn,.detail-btn{font-size:2.45vw !important}
+.vote-button{font-size:3.05vw !important}
+
+
+/* MAX VOTE FEEDBACK: no alert dialog; briefly illuminate the entire viewport edge. */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:10000;
+  opacity:0;
+  box-shadow:inset 0 0 0 0 rgba(255,35,35,0);
+}
+body.max-vote-alert::after{
+  animation:maxVoteEdgeFlash .65s ease-out both;
+}
+@keyframes maxVoteEdgeFlash{
+  0%{opacity:0;box-shadow:inset 0 0 0 .05vw rgba(255,35,35,0)}
+  18%{opacity:1;box-shadow:inset 0 0 1.2vw .25vw rgba(255,35,35,.92)}
+  48%{opacity:1;box-shadow:inset 0 0 2.2vw .45vw rgba(255,35,35,.78)}
+  100%{opacity:0;box-shadow:inset 0 0 0 0 rgba(255,35,35,0)}
+}
+
+
+/* 4作品目選択時：画面内の各領域の外周を順番に赤くフラッシュ */
+.max-vote-red-flash{
+  animation:maxVoteRegionFlash .42s steps(1,end) both !important;
+  position:relative;
+  z-index:120 !important;
+  will-change:outline-color,box-shadow;
+}
+
+@keyframes maxVoteRegionFlash{
+  0%,100%{
+    outline-color:transparent;
+    outline-width:0;
+    outline-style:solid;
+    box-shadow:none;
+  }
+  8%{
+    outline:.22vw solid rgba(255,25,25,1);
+    box-shadow:0 0 1.0vw rgba(255,25,25,.95), inset 0 0 .7vw rgba(255,25,25,.35);
+  }
+  22%{
+    outline:.30vw solid rgba(255,35,35,1);
+    box-shadow:0 0 2.0vw rgba(255,25,25,1), inset 0 0 1.2vw rgba(255,25,25,.45);
+  }
+  42%{
+    outline:.12vw solid rgba(255,45,45,.45);
+    box-shadow:0 0 .7vw rgba(255,25,25,.45), inset 0 0 .35vw rgba(255,25,25,.18);
+  }
+  58%{
+    outline:.25vw solid rgba(255,30,30,.95);
+    box-shadow:0 0 1.5vw rgba(255,25,25,.9), inset 0 0 .9vw rgba(255,25,25,.3);
+  }
+  100%{
+    outline:0 solid rgba(255,25,25,0);
+    box-shadow:none;
+  }
+}
+
+/* =========================================================
+   FINAL IMAGE CRT PASS
+   作品画像だけに静止CRTマスク／ビネット／粒子感を適用
+   重いfilter・backdrop-filter・常時アニメーションは使用しない
+========================================================= */
+.work-image-wrap{
+  isolation:isolate !important;
+}
+
+.work-image-wrap::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:5 !important;
+  pointer-events:none !important;
+  display:block !important;
+  opacity:.72 !important;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,.075) 0,
+      rgba(255,255,255,.075) 0.0974vw,
+      rgba(0,0,0,.16) 0.0974vw,
+      rgba(0,0,0,.16) 0.2272vw
+    ),
+    radial-gradient(circle at 18% 24%,rgba(255,255,255,.11) 0 .045vw,transparent .065vw),
+    radial-gradient(circle at 73% 62%,rgba(255,255,255,.085) 0 .040vw,transparent .060vw),
+    radial-gradient(circle at 42% 82%,rgba(255,255,255,.075) 0 .035vw,transparent .055vw),
+    radial-gradient(circle at 88% 18%,rgba(0,0,0,.16) 0 .06vw,transparent .08vw);
+  background-size:auto, 1.15vw 1.15vw, 1.35vw 1.35vw, 1.05vw 1.05vw, 1.25vw 1.25vw;
+  mix-blend-mode:screen !important;
+}
+
+.work-image-wrap::after{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:6 !important;
+  pointer-events:none !important;
+  display:block !important;
+  opacity:1 !important;
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 48%,
+      rgba(0,0,0,.10) 67%,
+      rgba(0,0,0,.34) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.10),
+      transparent 12%,
+      transparent 88%,
+      rgba(0,0,0,.10)
+    );
+  box-shadow:inset 0 0 2.4vw rgba(0,0,0,.34) !important;
+}
+
+.work-image{
+  position:relative !important;
+  z-index:1 !important;
+}
+
+/* =========================================================
+   MATRIX CYBERPUNK PASS
+   黒一色から深緑～ティール基調へ。
+   動く粒子・filter・backdrop-filterは使用しない。
+========================================================= */
+:root{
+  --bg:#06110d;
+  --panel:#071712;
+  --panel2:#0a1d16;
+  --cyan:#54ffd0;
+  --cyan2:#a5ffe9;
+  --magenta:#2dff9b;
+  --text:#e7fff5;
+  --muted:#71988b;
+  --muted2:#b9d9cc;
+  --line:rgba(84,255,208,.48);
+  --line-soft:rgba(84,255,208,.20);
+}
+
+body{
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(45,255,155,.12),transparent 38%),
+    radial-gradient(ellipse at 0% 35%,rgba(84,255,208,.055),transparent 30%),
+    radial-gradient(ellipse at 100% 70%,rgba(0,255,130,.045),transparent 32%),
+    linear-gradient(180deg,#081b14 0%,#06130f 48%,#040c09 100%);
+}
+
+/* Matrix-like static digital field: deliberately subtle and non-animated. */
+body::before{
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0,
+      transparent 3.8vw,
+      rgba(84,255,208,.025) 3.86vw,
+      transparent 3.94vw),
+    repeating-linear-gradient(180deg,
+      transparent 0,
+      transparent 6.0595vw,
+      rgba(84,255,208,.018) 6.1461vw,
+      transparent 6.2759vw),
+    linear-gradient(90deg,
+      transparent 0 12%,
+      rgba(45,255,155,.025) 12.05% 12.12%,
+      transparent 12.18% 31%,
+      rgba(84,255,208,.018) 31.05% 31.11%,
+      transparent 31.17% 68%,
+      rgba(45,255,155,.022) 68.05% 68.12%,
+      transparent 68.18% 88%,
+      rgba(84,255,208,.018) 88.05% 88.12%,
+      transparent 88.18%);
+  opacity:.9;
+}
+
+.app-header,
+.selection-console,
+.work-card{
+  border-color:rgba(84,255,208,.52);
+  background:
+    linear-gradient(90deg,rgba(84,255,208,.045),transparent 45%,rgba(45,255,155,.028)),
+    linear-gradient(180deg,rgba(11,37,27,.96),rgba(5,20,15,.97));
+}
+
+.app-header{
+  box-shadow:
+    inset 0 0 0 .10vw rgba(84,255,208,.10),
+    inset 0 -.18vw 1.2vw rgba(45,255,155,.035),
+    0 0 2vw rgba(45,255,155,.055);
+}
+
+.app-header::before,
+.app-header::after{
+  border-color:var(--cyan);
+}
+
+.header-topline,
+.header-feed{
+  color:#76a494;
+}
+.header-feed b{color:#62ffc6}
+
+.app-header h1{
+  font-family:"M PLUS 1 Code",monospace;
+  font-weight:500;
+  letter-spacing:.045em;
+  color:#dffff1;
+  text-shadow:0 0 1.1vw rgba(84,255,208,.16);
+}
+
+.header-rule{
+  background:linear-gradient(90deg,#54ffd0,rgba(84,255,208,.08));
+  box-shadow:0 0 1vw rgba(84,255,208,.32);
+}
+
+.selection-console{
+  box-shadow:inset 0 0 0 .10vw rgba(84,255,208,.06);
+}
+.console-left{border-right-color:rgba(84,255,208,.22)}
+.console-label{color:#d8fff1}
+#selected{color:#a8cfc0}
+
+.console-right .vote-button{
+  border-color:#54ffd0;
+  background:rgba(84,255,208,.035);
+  color:#c5ffed;
+}
+.console-right .vote-button:not(:disabled){
+  background:#54ffd0;
+  color:#03130e;
+  box-shadow:0 0 1.1vw rgba(84,255,208,.20);
+}
+
+.works-list{position:relative}
+
+.work-card{
+  box-shadow:
+    inset 0 0 0 .10vw rgba(84,255,208,.045),
+    inset 0 0 2.2vw rgba(0,255,145,.018),
+    0 0 1.4vw rgba(0,0,0,.38);
+}
+
+.work-card::before{
+  background:
+    repeating-linear-gradient(180deg,
+      transparent 0,
+      transparent 1.2%,
+      rgba(84,255,208,.018) 1.25%,
+      transparent 1.45%),
+    linear-gradient(90deg,transparent 0 7%,rgba(84,255,208,.018) 7.05% 7.12%,transparent 7.18% 93%,rgba(45,255,155,.014) 93.05% 93.12%,transparent 93.18%);
+}
+
+.work-card::after{
+  border-color:#54ffd0;
+}
+
+.work-number{
+  color:#cffff0;
+  text-shadow:0 0 0.8vw rgba(84,255,208,.10);
+}
+.work-number::after{background:#54ffd0;box-shadow:0 0 0.6vw rgba(84,255,208,.35)}
+
+.work-image-wrap{
+  border-color:rgba(84,255,208,.55);
+  background:#03100b;
+  box-shadow:inset 0 0 1.2vw rgba(84,255,208,.055),0 0 0.9vw rgba(84,255,208,.035);
+}
+
+/* Data / terminal labels become green-system UI. */
+.vote-trend,
+
+.vote-trend-kicker,
+.vote-trend-status,
+.vote-trend-total,
+.data-label,
+.work-author-label,
+.work-comment-label{
+  color:#70b9a0 !important;
+}
+
+/* Keep the existing CRT image treatment, but tint it very slightly green. */
+.work-image-wrap::before{
+  opacity:.68 !important;
+  background-color:rgba(25,255,160,.025);
+}
+
+/* INFO TYPOGRAPHY: author name and comment match the title size. */
+.work-author,
+.work-comment{
+  font-size:2.55vw !important;
+}
+
+
+/* =========================================================
+   DATA STREAM: 3-line preview + in-card full expansion
+   ========================================================= */
+.work-comment{
+  display:-webkit-box !important;
+  -webkit-box-orient:vertical !important;
+  white-space:normal !important;
+  overflow:hidden !important;
+  overflow-wrap:anywhere !important;
+  line-height:1.28 !important;
+}
+.work-comment.is-collapsed{
+  -webkit-line-clamp:3 !important;
+  line-clamp:3 !important;
+}
+.work-comment.is-expanded{
+  display:block !important;
+  -webkit-line-clamp:unset !important;
+  line-clamp:unset !important;
+  overflow:visible !important;
+}
+.work-card.detail-open{
+  height:auto !important;
+  max-height:none !important;
+}
+.work-card.detail-open .work-comment-block{
+  overflow:visible !important;
+}
+
+/* DATA STREAM: keep the comment rail clear of the image edge. */
+.work-comment-block{
+  margin-left:.80vw !important;
+  padding-left:1.4vw !important;
+  width:calc(100% - .80vw) !important;
+}
+
+/* FINAL: DATA STREAM preview is always visible before DETAIL. */
+.work-comment-block{
+  visibility:visible !important;
+  opacity:1 !important;
+}
+.work-comment.is-collapsed{
+  display:-webkit-box !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  height:auto !important;
+  max-height:calc(3 * 1.28em) !important;
+  -webkit-line-clamp:3 !important;
+  line-clamp:3 !important;
+  overflow:hidden !important;
+}
+
+/* =========================================================
+   FINAL DATA STREAM FIX
+   ・通常時も3行を確実に表示
+   ・画像は4:3を維持して中央の切れ込みを防止
+   ・コメント行を明示的に確保
+   ・DETAIL展開時も画像サイズは変えない
+========================================================= */
+.work-card{
+  grid-template-rows:62% 38% !important;
+  height:24.48vw !important;
+  min-height:24.48vw !important;
+  max-height:none !important;
+  align-items:stretch !important;
+}
+
+.work-number{
+  grid-row:1 / 3 !important;
+}
+
+.work-image-wrap{
+  grid-row:1 / 3 !important;
+  height:24.48vw !important;
+  min-height:24.48vw !important;
+  max-height:24.48vw !important;
+  align-self:start !important;
+}
+
+.work-image{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center center !important;
+}
+
+.work-info{
+  grid-row:1 !important;
+  height:auto !important;
+  min-height:0 !important;
+  overflow:hidden !important;
+}
+
+.work-actions{
+  grid-row:1 !important;
+  height:auto !important;
+  min-height:0 !important;
+  overflow:hidden !important;
+}
+
+.work-comment-block{
+  grid-column:3 / 5 !important;
+  grid-row:2 !important;
+  align-self:stretch !important;
+  min-height:0 !important;
+  height:auto !important;
+  overflow:hidden !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+
+.work-comment-block .work-comment{
+  display:-webkit-box !important;
+  -webkit-box-orient:vertical !important;
+  -webkit-line-clamp:3 !important;
+  line-clamp:3 !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  height:auto !important;
+  max-height:calc(3 * 1.28em) !important;
+  overflow:hidden !important;
+  white-space:normal !important;
+}
+
+/* DETAIL時だけ右側のコメント領域を下へ拡張。
+   画像は4:3のまま固定する。 */
+.work-card.detail-open{
+  grid-template-rows:62% auto !important;
+  height:auto !important;
+  min-height:24.48vw !important;
+}
+
+.work-card.detail-open .work-image-wrap{
+  height:24.48vw !important;
+  min-height:24.48vw !important;
+  max-height:24.48vw !important;
+  align-self:start !important;
+}
+
+.work-card.detail-open .work-comment-block{
+  overflow:visible !important;
+}
+
+.work-card.detail-open .work-comment{
+  display:block !important;
+  -webkit-line-clamp:unset !important;
+  line-clamp:unset !important;
+  max-height:none !important;
+  overflow:visible !important;
+}
+
+/* =========================================================
+   DATA STREAM RAIL FINAL FIX
+   通常時：コメントの縦レールは非表示
+   DETAIL時：タイトル／作者名と同じ左位置から表示
+========================================================= */
+.work-comment-block{
+  border-left:none !important;
+  margin-left:.80vw !important;
+  padding-left:1.4vw !important;
+  width:calc(100% - .80vw) !important;
+}
+.work-comment-block::before{
+  display:none !important;
+}
+.work-card.detail-open .work-comment-block{
+  border-left:.20vw solid var(--cyan) !important;
+}
+.work-card.detail-open .work-comment-block::before{
+  display:block !important;
+}
+
+/* コメントのレールを上段の情報レールと同じX位置に固定 */
+.work-card > .work-comment-block{
+  margin-left:.80vw !important;
+  box-sizing:border-box !important;
+}
+
+/* DETAIL時のレールはコメント行の全高を通す */
+.work-card.detail-open .work-comment-block::before{
+  top:0 !important;
+  height:100% !important;
+}
+
+/* =========================================================
+   FINAL COMMENT RAIL + TEXT CONTAINMENT FIX
+   - 上段のタイトル／作者名と同じX位置
+   - DATA STREAMの縦棒はDETAIL時だけ表示
+   - コメント文字をカード内に完全収める
+========================================================= */
+.work-card > .work-comment-block{
+  grid-column:3 / 5 !important;
+  grid-row:2 !important;
+  min-width:0 !important;
+  box-sizing:border-box !important;
+  margin-left:.80vw !important;
+  width:calc(100% - .80vw) !important;
+  padding-left:1.40vw !important;
+  padding-right:1.00vw !important;
+  border-left:0 !important;
+  overflow:hidden !important;
+}
+
+.work-card > .work-comment-block::before{
+  display:none !important;
+}
+
+.work-card > .work-comment-block .work-comment{
+  display:-webkit-box !important;
+  -webkit-box-orient:vertical !important;
+  -webkit-line-clamp:3 !important;
+  line-clamp:3 !important;
+  min-width:0 !important;
+  width:100% !important;
+  max-width:100% !important;
+  box-sizing:border-box !important;
+  white-space:normal !important;
+  overflow:hidden !important;
+  overflow-wrap:anywhere !important;
+  word-break:break-word !important;
+}
+
+/* DETAIL時だけ、上段の縦棒と同じ位置から縦棒を出す */
+.work-card.detail-open > .work-comment-block{
+  border-left:.20vw solid var(--cyan) !important;
+  overflow:hidden !important;
+}
+
+.work-card.detail-open > .work-comment-block .work-comment{
+  display:block !important;
+  -webkit-line-clamp:unset !important;
+  line-clamp:unset !important;
+  max-height:none !important;
+  height:auto !important;
+  overflow:hidden !important;
+  white-space:normal !important;
+  overflow-wrap:anywhere !important;
+  word-break:break-word !important;
+}
+
+/* DETAIL時はコメント全文がカード内で収まるようカードだけ縦に伸ばす */
+.work-card.detail-open{
+  height:auto !important;
+  min-height:calc(25.5vw + 1.5149vw) !important;
+  max-height:none !important;
+}
+
+/* 4作品目など他のカードの高さ・レイアウトには影響させない */
+.work-card:not(.detail-open) > .work-comment-block{
+  max-height:calc(3 * 1.28em + 4.761vw) !important;
+}
+/* =========================================================
+   FINAL DATA STREAM LAYOUT FIX
+   - X位置は現状維持
+   - 通常時/DETAIL時で情報の開始Yを変えない
+   - DATA STREAMの縦棒は通常時も表示
+   - DETAIL時は同じ位置から下方向だけ伸びる
+   - コメント文字はカード右端を越えない
+========================================================= */
+.work-card{
+  position:relative !important;
+  overflow:hidden !important;
+  min-width:0 !important;
+}
+
+/* コメント領域を上段と同じ「上基準」にする。
+   grid-row:1 に置き、margin-topだけで開始位置を固定。
+   DETAILで高さが増えても開始Yは動かない。 */
+.work-card > .work-comment-block{
+  grid-column:3 / 5 !important;
+  grid-row:1 !important;
+  align-self:start !important;
+  min-width:0 !important;
+  min-height:0 !important;
+  box-sizing:border-box !important;
+  margin-left:.80vw !important;
+  margin-top:19.4769vw !important;
+  margin-right:0 !important;
+  width:calc(100% - .80vw) !important;
+  max-width:calc(100% - .80vw) !important;
+  padding-left:1.40vw !important;
+  padding-right:1.00vw !important;
+  padding-top:0 !important;
+  padding-bottom:0.9738vw !important;
+  border-left:.20vw solid var(--cyan) !important;
+  border-top:0 !important;
+  border-right:0 !important;
+  border-bottom:0 !important;
+  overflow:hidden !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  z-index:12 !important;
+}
+
+/* 擬似要素による二重レールは使わない */
+.work-card > .work-comment-block::before{
+  display:none !important;
+}
+
+/* 通常時：3行。領域そのものは上基準で固定 */
+.work-card:not(.detail-open) > .work-comment-block .work-comment{
+  display:-webkit-box !important;
+  -webkit-box-orient:vertical !important;
+  -webkit-line-clamp:3 !important;
+  line-clamp:3 !important;
+  min-width:0 !important;
+  width:100% !important;
+  max-width:100% !important;
+  height:auto !important;
+  max-height:calc(3 * 1.28em) !important;
+  box-sizing:border-box !important;
+  white-space:normal !important;
+  overflow:hidden !important;
+  overflow-wrap:anywhere !important;
+  word-break:break-word !important;
+  line-break:auto !important;
+}
+
+/* DETAIL時：開始位置は通常時と完全に同じ。
+   高さだけ下方向へ増える。 */
+.work-card.detail-open > .work-comment-block{
+  align-self:start !important;
+  margin-top:19.4769vw !important;
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  overflow:hidden !important;
+  border-left:.20vw solid var(--cyan) !important;
+}
+
+.work-card.detail-open > .work-comment-block .work-comment{
+  display:block !important;
+  -webkit-line-clamp:unset !important;
+  line-clamp:unset !important;
+  min-width:0 !important;
+  width:100% !important;
+  max-width:100% !important;
+  height:auto !important;
+  max-height:none !important;
+  box-sizing:border-box !important;
+  white-space:normal !important;
+  overflow:hidden !important;
+  overflow-wrap:anywhere !important;
+  word-break:break-word !important;
+  line-break:auto !important;
+}
+
+/* DETAILでカードが伸びても、画像・番号・上段情報・ボタンは上端固定 */
+.work-card.detail-open{
+  height:auto !important;
+  min-height:calc(25.5vw + 1.5149vw) !important;
+  max-height:none !important;
+  align-items:start !important;
+  grid-template-rows:auto auto !important;
+}
+
+.work-card.detail-open > .work-image-wrap,
+.work-card.detail-open > .work-info,
+.work-card.detail-open > .work-actions,
+.work-card.detail-open > .work-number{
+  align-self:start !important;
+}
+
+/* 画像は通常時/DETAIL時とも同じ位置・同じ4:3 */
+.work-card > .work-image-wrap,
+.work-card.detail-open > .work-image-wrap{
+  grid-row:1 / 3 !important;
+  align-self:start !important;
+  width:34vw !important;
+  height:25.5vw !important;
+  min-height:25.5vw !important;
+  max-height:25.5vw !important;
+  object-fit:cover !important;
+}
+
+.work-card > .work-image-wrap .work-image,
+.work-card.detail-open > .work-image-wrap .work-image{
+  width:100% !important;
+  height:100% !important;
+  min-width:0 !important;
+  min-height:0 !important;
+  object-fit:cover !important;
+  object-position:center center !important;
+}
+
+/* 上段の情報とボタンも常にカード上端から開始 */
+.work-card > .work-info,
+.work-card > .work-actions{
+  grid-row:1 !important;
+  align-self:start !important;
+  min-width:0 !important;
+}
+
+/* コメントがカード右端から1vw程度内側で止まるようにする */
+.work-card > .work-comment-block .work-comment,
+.work-card > .work-comment-block .work-comment-label{
+  min-width:0 !important;
+  max-width:100% !important;
+}
+
+/* =========================================================
+   DATA STREAM FINAL FINAL
+   - 通常時：カード内に収まる範囲で3行、超えた分は…
+   - DETAIL：全文を表示し、内容量に合わせてカードを下方向へ拡張
+   - 通常時とDETAIL時で上側のY座標を変えない
+   - 画像は通常時/DETAIL時とも同じ固定サイズ
+   - DETAIL時の余白は最小限
+========================================================= */
+.work-card:not(.detail-open){
+  height:calc(25.5vw + 1.5149vw) !important;
+  min-height:calc(25.5vw + 1.5149vw) !important;
+  max-height:calc(25.5vw + 1.5149vw) !important;
+  grid-template-rows:1fr !important;
+  overflow:hidden !important;
+}
+
+.work-card:not(.detail-open) > .work-number,
+.work-card:not(.detail-open) > .work-image-wrap,
+.work-card:not(.detail-open) > .work-info,
+.work-card:not(.detail-open) > .work-actions,
+.work-card:not(.detail-open) > .work-comment-block{
+  grid-row:1 !important;
+  align-self:start !important;
+}
+
+.work-card:not(.detail-open) > .work-image-wrap{
+  height:25.5vw !important;
+  min-height:25.5vw !important;
+  max-height:25.5vw !important;
+}
+
+/* 通常時のDATA STREAMは上基準を固定し、3行を超えたら末尾を…にする */
+.work-card:not(.detail-open) > .work-comment-block{
+  margin-top:19.4769vw !important;
+  height:auto !important;
+  max-height:calc(1.08 * 3 * 1em + 3.8954vw) !important;
+  overflow:hidden !important;
+  padding-bottom:0 !important;
+}
+
+.work-card:not(.detail-open) > .work-comment-block .work-comment{
+  display:-webkit-box !important;
+  -webkit-box-orient:vertical !important;
+  -webkit-line-clamp:3 !important;
+  line-clamp:3 !important;
+  line-height:1.08 !important;
+  height:auto !important;
+  max-height:calc(1.08 * 3 * 1em) !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:normal !important;
+  overflow-wrap:anywhere !important;
+  word-break:break-word !important;
+}
+
+/* DETAIL時は1行目の開始位置を通常時と完全に同じにする。
+   カードの高さはコメント全文に必要な分だけ下へ伸びる。 */
+.work-card.detail-open{
+  height:auto !important;
+  min-height:25.5vw !important;
+  max-height:none !important;
+  grid-template-rows:auto !important;
+  overflow:hidden !important;
+  align-items:start !important;
+  padding-bottom:1.8395vw !important;
+}
+
+.work-card.detail-open > .work-number,
+.work-card.detail-open > .work-image-wrap,
+.work-card.detail-open > .work-info,
+.work-card.detail-open > .work-actions,
+.work-card.detail-open > .work-comment-block{
+  grid-row:1 !important;
+  align-self:start !important;
+}
+
+.work-card.detail-open > .work-image-wrap{
+  height:25.5vw !important;
+  min-height:25.5vw !important;
+  max-height:25.5vw !important;
+}
+
+.work-card.detail-open > .work-comment-block{
+  margin-top:19.4769vw !important;
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  overflow:visible !important;
+  padding-bottom:0.541vw !important;
+}
+
+.work-card.detail-open > .work-comment-block .work-comment{
+  display:block !important;
+  line-clamp:unset !important;
+  -webkit-line-clamp:unset !important;
+  line-height:1.08 !important;
+  height:auto !important;
+  max-height:none !important;
+  overflow:visible !important;
+  white-space:normal !important;
+  overflow-wrap:anywhere !important;
+  word-break:break-word !important;
+}
+
+/* =========================================================
+   DESIGN TUNE — WORK AREA EXPANSION
+   左番号レールを整理し、作品画像エリアを約5%拡張。
+   情報欄・操作欄のX位置は維持。
+========================================================= */
+.works-list > .work-card{
+  grid-template-columns:5.20vw 34.24vw 33.76vw 19.20vw !important;
+  column-gap:1.20vw !important;
+}
+
+.works-list > .work-card > .work-image-wrap{
+  width:34.24vw !important;
+  height:25.68vw !important;
+  min-height:25.68vw !important;
+  max-height:25.68vw !important;
+}
+
+.works-list > .work-card > .work-image-wrap > .work-image{
+  width:100% !important;
+  height:100% !important;
+}
+
+.works-list > .work-card{
+  min-height:calc(25.68vw + 1.5149vw) !important;
+}
+
+/* BUTTON TUNE — SELECT / DETAIL
+   ボタン間隔を詰め、その分だけ各ボタンを縦方向に拡張。 */
+.work-card > .work-actions{
+  gap:0.8656vw !important;
+}
+
+.work-card > .work-actions .select-btn,
+.work-card > .work-actions .detail-btn{
+  height:7.4662vw !important;
+  min-height:7.4662vw !important;
+}
+
+/* 4作品目選択時：中央ERRORパネル */
+.max-vote-error-panel{
+  position:fixed;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%) scale(.94);
+  width:min(68vw,46vw);
+  min-height:12vw;
+  box-sizing:border-box;
+  padding:2.2vw 3vw;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:1vw;
+  border:.18vw solid rgba(255,35,35,.92);
+  background:rgba(20,6,7,.92);
+  color:#ff4a4a;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  z-index:20000;
+  box-shadow:inset 0 0 1.8vw rgba(255,35,35,.18),0 0 1.8vw rgba(255,35,35,.55);
+}
+.max-vote-error-panel.show{
+  visibility:visible;
+  animation:maxVoteErrorFlash .72s steps(1,end) both;
+}
+.max-vote-error-title{
+  font-family:Montserrat,sans-serif;
+  font-size:3.8vw;
+  line-height:1;
+  font-weight:700;
+  letter-spacing:0.28vw;
+}
+.max-vote-error-message{
+  font-family:'M PLUS 1 Code',sans-serif;
+  font-size:2.15vw;
+  line-height:1.35;
+  font-weight:600;
+  letter-spacing:0.06vw;
+  white-space:nowrap;
+}
+@keyframes maxVoteErrorFlash{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.94)}
+  12%{opacity:1;transform:translate(-50%,-50%) scale(1.01)}
+  22%{opacity:.38}
+  32%{opacity:1}
+  48%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  72%{opacity:.72}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1)}
+}
+@media(max-width:100vw){
+  .max-vote-error-panel{width:72vw;min-height:15vw;padding:2.8vw 3.5vw;}
+  .max-vote-error-title{font-size:5.2vw;}
+  .max-vote-error-message{font-size:3.15vw;}
+}
+
+
+/* MAX VOTE ERROR — tall warning terminal */
+#maxVoteErrorPanel{
+  display:flex !important;
+  visibility:hidden;
+  opacity:0;
+  position:fixed !important;
+  left:50% !important;
+  top:50% !important;
+  transform:translate(-50%,-50%) scale(.96) !important;
+  z-index:999999 !important;
+  pointer-events:none !important;
+  box-sizing:border-box !important;
+  width:min(54vw,52vw) !important;
+  min-height:34vw !important;
+  padding:4vw 3vw !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:2.1vw !important;
+  border:.035vw solid rgba(255,45,45,.98) !important;
+  background:transparent !important;
+  color:#ff5050 !important;
+  box-shadow:0 0 .45vw rgba(255,35,35,.42) !important;
+}
+#maxVoteErrorPanel.show{
+  visibility:visible !important;
+  animation:maxVoteErrorFlashHard .86s steps(1,end) both !important;
+}
+#maxVoteErrorPanel .max-vote-error-code,
+#maxVoteErrorPanel .max-vote-error-sub{
+  font-size:1.55vw !important;
+  line-height:1 !important;
+  font-weight:200 !important;
+  letter-spacing:0.42vw !important;
+  opacity:.72 !important;
+}
+#maxVoteErrorPanel .max-vote-error-title{
+  font-size:8.2vw !important;
+  line-height:.95 !important;
+  font-weight:200 !important;
+  letter-spacing:0.7vw !important;
+}
+#maxVoteErrorPanel .max-vote-error-message{
+  font-size:3.7vw !important;
+  line-height:1.35 !important;
+  font-weight:200 !important;
+  white-space:nowrap !important;
+}
+
+#maxVoteErrorPanel .max-vote-error-warning,
+#maxVoteErrorPanel .max-vote-error-warning-bottom{
+  font-size:2.35vw !important;
+  line-height:1 !important;
+  font-weight:200 !important;
+  letter-spacing:0.65vw !important;
+  opacity:.9 !important;
+}
+#maxVoteErrorPanel .max-vote-error-warning-bottom{
+  margin-top:1.1vw !important;
+  font-size:1.8vw !important;
+  opacity:.68 !important;
+}
+#maxVoteErrorPanel .max-vote-error-meta{
+  width:100% !important;
+  text-align:center !important;
+  font-size:1.45vw !important;
+  line-height:1.15 !important;
+  font-weight:200 !important;
+  letter-spacing:0.34vw !important;
+  opacity:.62 !important;
+}
+
+@keyframes maxVoteErrorFlashHard{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.96)}
+  10%{opacity:1;transform:translate(-50%,-50%) scale(1.015)}
+  18%{opacity:.22}
+  28%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  48%{opacity:1}
+  62%{opacity:.48}
+  75%{opacity:1}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1)}
+}
+
+
+/* ERROR WARNING VISUAL OVERRIDE */
+#maxVoteErrorPanel{
+  --error-red:#ff1744;
+  border-color:rgba(255,23,68,.98) !important;
+  color:var(--error-red) !important;
+  box-shadow:0 0 1.2vw rgba(255,23,68,.72),0 0 3vw rgba(255,23,68,.38),inset 0 0 1.4vw rgba(255,23,68,.10) !important;
+  overflow:hidden !important;
+}
+#maxVoteErrorPanel::before{
+  content:'⚠' !important;
+  position:absolute !important;
+  left:50% !important;
+  top:50% !important;
+  transform:translate(-50%,-50%) !important;
+  font-size:31vw !important;
+  line-height:1 !important;
+  font-weight:200 !important;
+  color:rgba(255,23,68,.095) !important;
+  text-shadow:0 0 1.5vw rgba(255,23,68,.28) !important;
+  pointer-events:none !important;
+  z-index:0 !important;
+}
+#maxVoteErrorPanel > *{
+  position:relative !important;
+  z-index:1 !important;
+  text-shadow:0 0 .65vw rgba(255,23,68,.72),0 0 1.5vw rgba(255,23,68,.28) !important;
+}
+#maxVoteErrorPanel .max-vote-error-title{
+  color:#ff3157 !important;
+  text-shadow:0 0 .8vw rgba(255,23,68,.95),0 0 2vw rgba(255,23,68,.58) !important;
+}
+#maxVoteErrorPanel .max-vote-error-warning,
+#maxVoteErrorPanel .max-vote-error-warning-bottom{
+  color:#ff4968 !important;
+}
+
+/* ADMIN LINK IN VOTE STATUS */
+.selection-console .console-left{
+  position:relative;
+}
+.admin-link{
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font:500 1.15vw 'M PLUS 1 Code',sans-serif;
+  letter-spacing:.08em;
+  padding:0;
+  margin-left:1.2vw;
+  cursor:pointer;
+  text-decoration:underline;
+  text-underline-offset:.25em;
+}
+.admin-link:hover,
+.admin-link:focus-visible{
+  color:var(--cyan);
+  outline:none;
+}
+.vote-status-admin{
+  border:0;
+  background:transparent;
+  color:inherit;
+  padding:0;
+  margin:0;
+  cursor:pointer;
+  text-align:left;
+}
+.vote-status-admin:hover,
+.vote-status-admin:focus-visible{
+  color:var(--cyan);
+  outline:none;
+}
+.selection-console .admin-box{
+  position:absolute;
+  left:0;
+  top:calc(100% + 1.7313vw);
+  z-index:1000;
+  display:flex;
+  gap:.5vw;
+  margin:0;
+  padding:1.2985vw .6vw;
+  border:.08vw solid var(--line);
+  background:rgba(3,10,9,.96);
+}
+.selection-console .admin-box input{
+  width:9vw;
+  min-width:17.9487vw;
+  border:.08vw solid var(--line);
+  background:#03070a;
+  color:var(--text);
+  padding:1.2985vw .5vw;
+  font:400 1.15vw 'M PLUS 1 Code',sans-serif;
+}
+.selection-console .admin-box button{
+  min-height:0;
+  border:.08vw solid var(--line);
+  background:transparent;
+  color:var(--cyan);
+  padding:1.0821vw .7vw;
+  font:500 1.15vw 'M PLUS 1 Code',sans-serif;
+  cursor:pointer;
+}
+
+
+/* =========================================================
+   CALLOUT REVEAL
+   既存の引き出し線は通常時は非表示。
+   SELECT時だけ、既存の線そのものを描画して出現させる。
+========================================================= */
+.work-card:not(.selected) .callout-svg{
+  opacity:0 !important;
+  visibility:hidden !important;
+}
+
+.work-card.selected .callout-svg{
+  opacity:1 !important;
+  visibility:visible !important;
+}
+
+.callout-path.callout-reveal-path{
+  animation:calloutPathReveal .48s cubic-bezier(.22,.8,.32,1) forwards;
+}
+
+.callout-target.callout-reveal-target,
+.callout-target-core.callout-reveal-target{
+  animation:calloutTargetReveal .16s ease-out .34s both;
+}
+
+@keyframes calloutPathReveal{
+  from{
+    stroke-dashoffset:var(--callout-length);
+  }
+  to{
+    stroke-dashoffset:0;
+  }
+}
+
+@keyframes calloutTargetReveal{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+
+/* =========================================================
+   SELECT時：既存引き出し線の出現
+   既存の常時アニメーション停止指定より後に置く
+========================================================= */
+.work-card:not(.selected) .callout-svg{
+  opacity:0 !important;
+  visibility:hidden !important;
+}
+
+.work-card.selected .callout-svg{
+  opacity:1 !important;
+  visibility:visible !important;
+}
+
+.work-card.selected .callout-path.callout-reveal-path{
+  stroke-dasharray:var(--callout-length) !important;
+  animation:calloutPathReveal .48s cubic-bezier(.22,.8,.32,1) forwards !important;
+}
+
+@keyframes calloutPathReveal{
+  from{
+    stroke-dashoffset:var(--callout-length);
+  }
+  to{
+    stroke-dashoffset:0;
+  }
+}
+.voted-mask-check:focus-visible{
+  outline:.12vw solid rgba(255,255,255,.9);
+  outline-offset:.45vw;
+}
+
+
+/* =========================================================
+   CARD NUMBER STATUS
+   左側の作品番号エリアだけに追加するステータス表示。
+   GRID・画像・引き出し線の位置は変更しない。
+========================================================= */
+.work-number .number-status{
+  margin-top:2.7051vw;
+  display:flex;
+  flex-direction:column;
+  gap:0.6925vw;
+  width:max-content;
+  min-width:4.8vw;
+  font-family:Montserrat,sans-serif;
+  line-height:1;
+  letter-spacing:.08em;
+  pointer-events:none;
+}
+.work-number .number-status-label{
+  font-size:.72vw;
+  font-weight:500;
+  color:rgba(160,230,238,.58);
+  letter-spacing:.18em;
+}
+.work-number .number-status-value{
+  position:relative;
+  padding-left:.78em;
+  font-size:.78vw;
+  font-weight:600;
+  color:rgba(84,255,208,.78);
+  letter-spacing:.10em;
+}
+.work-number .number-status-value::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:50%;
+  width:.38em;
+  height:.38em;
+  transform:translateY(-50%);
+  border-radius:50%;
+  background:#54ffd0;
+  box-shadow:0 0 0.45vw rgba(84,255,208,.65);
+}
+.work-card.selected .work-number .number-status-value{
+  font-size:0;
+  color:#27efff;
+}
+.work-card.selected .work-number .number-status-value::after{
+  content:"LOCKED";
+  font-size:.78vw;
+  letter-spacing:.10em;
+}
+.work-card.selected .work-number .number-status-value::before{
+  background:#27efff;
+  box-shadow:0 0 0.45vw rgba(39,239,255,.8);
+}
+
+
+/* =========================================================
+   LOCK → SELECT：解除時の残留エフェクトを完全停止
+   スクロール・別タップを待たず、その場で通常状態へ戻す
+========================================================= */
+.work-card.unlock-return .select-btn,
+.select-btn.unlocking{
+  animation:none !important;
+  transform:none !important;
+  background:rgba(0,246,255,.02) !important;
+  border-color:rgba(0,246,255,.34) !important;
+  color:rgba(223,252,255,.68) !important;
+  text-shadow:none !important;
+  box-shadow:none !important;
+}
+.work-card.unlock-return .select-btn::after{
+  display:none !important;
+  animation:none !important;
+  opacity:0 !important;
+}
+
+/* =========================================================
+   MOBILE TOUCH：LOCK → SELECT 後に残る hover / active / focus を完全解除
+   スクロール・別タップを待たず、SELECT直後から通常表示に固定
+========================================================= */
+@media (hover:none) and (pointer:coarse){
+  .select-btn:not(.selected),
+  .select-btn:not(.selected):hover,
+  .select-btn:not(.selected):active,
+  .select-btn:not(.selected):focus,
+  .select-btn:not(.selected):focus-visible{
+    -webkit-tap-highlight-color:transparent !important;
+    background:rgba(3,10,14,.68) !important;
+    border-color:rgba(121,247,255,.42) !important;
+    color:#d6edf1 !important;
+    text-shadow:none !important;
+    box-shadow:none !important;
+    transform:none !important;
+    filter:none !important;
+  }
+
+  .select-btn:not(.selected)::before,
+  .select-btn:not(.selected)::after{
+    animation:none !important;
+    opacity:0 !important;
+  }
+}
+
+
+/* VOTE TREND — authoritative screen-ratio display */
+
+
+
+/* VOTE TREND — unified font source */
+.trend-y-label,
+
+
+/* VOTED MASK — hidden admin trigger: lower 1/4 */
+.voted-mask-admin-zone{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:25%;
+  z-index:20;
+  display:block;
+  margin:0;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:transparent;
+  cursor:default;
+  outline:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.voted-mask-admin-zone:focus-visible{
+  outline:none;
+}
+
+
+/* WIDTH BASED MOBILE FRAME — reduce side margins */
+.app-shell{
+  width:99vw !important;
+  margin-left:.5vw !important;
+  margin-right:.5vw !important;
+}
+
+
+/* FINAL WIDTH BASIS — use the actual containing width, not viewport-unit margins */
+.app-shell,
+.app-header,
+.selection-console,
+.works-list{
+  width:100% !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+.callout-svg{
+  width:100% !important;
+}
+
+/* =========================================================
+   FINAL WIDTH CONTRACT — ACTUAL SITE WIDTH
+   画面の実幅ではなく、サイト自身の100%幅を唯一の基準にする。
+   作品カード内もvw固定値を使わず、親幅の比率で100%を使い切る。
+========================================================= */
+.app-shell{
+  width:100% !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+
+.app-header,
+.selection-console,
+.works-list,
+.work-card,
+.vote-dock,
+.vote-dock-inner{
+  width:100% !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+
+/* 8 : 34 : 33 : 20 + 3 gaps = 100% */
+.works-list > .work-card{
+  grid-template-columns:8% 34% 33% 20% !important;
+  column-gap:1.6666667% !important;
+}
+
+/* 画像も所属する34%列を100%使用 */
+.works-list > .work-card > .work-image-wrap{
+  width:100% !important;
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  aspect-ratio:4 / 3 !important;
+}
+
+.works-list > .work-card > .work-image-wrap > .work-image{
+  width:100% !important;
+  height:100% !important;
+}
+
+/* 操作列も親列いっぱい */
+.work-card > .work-actions{
+  width:100% !important;
+  min-width:0 !important;
+}
+
+.detail-btn,
+.select-btn{
+  width:100% !important;
+}
+
+.callout-svg{
+  width:100% !important;
+}
+
+
+/* =========================================================
+   COMPACT HEIGHT TUNE — GRAPH + VOTE STATUS ONLY
+   幅・左右配置・作品カード・Safe Areaは変更しない
+========================================================= */
+.selection-console{
+  height:7.2vw !important;
+  min-height:0 !important;
+}
+.selection-console .console-left{
+  padding-top:1.35vw !important;
+  padding-bottom:1.35vw !important;
+}
+
+.vote-trend{
+  margin-top:.85vw !important;
+  margin-bottom:.85vw !important;
+  padding-top:.65vw !important;
+  padding-bottom:.25vw !important;
+}
+.vote-trend-head{
+  margin-bottom:.45vw !important;
+}
+.vote-trend-chart-wrap{
+  width:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  line-height:0 !important;
+}
+.vote-trend-chart{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  margin:0 !important;
+  padding:0 !important;
+}
+
+
+/* =========================================================
+   FINAL SIDE BREATHING ROOM + CARD COLUMN REBALANCE
+   左右に少し余裕を確保し、作品番号列を縮小して情報列へ配分。
+   Safe Area・縦横比・その他の構造は変更しない。
+========================================================= */
+.app-shell{
+  width:96% !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+.app-header,
+.selection-console,
+.works-list,
+.vote-dock,
+.vote-dock-inner{
+  width:100% !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+
+.works-list > .work-card{
+  grid-template-columns:5.8% 34% 35.2% 20% !important;
+  column-gap:1.6666667% !important;
+}
+
+.work-number{
+  margin-left:.8vw !important;
+}
+
+.works-list > .work-card > .work-info{
+  min-width:0 !important;
+  width:100% !important;
+}
+
+.works-list > .work-card > .work-actions{
+  min-width:0 !important;
+  width:100% !important;
+}
+
+/* =========================================================
+   MICRO LAYOUT TUNE — VOTE STATUS / CARD NUMBER / BUTTON TYPE
+   現在の96%幅設計とSafe Areaは維持。
+========================================================= */
+.selection-console{
+  height:5.8vw !important;
+  aspect-ratio:auto !important;
+}
+.selection-console .console-left{
+  padding-top:.85vw !important;
+  padding-bottom:.85vw !important;
+}
+
+.works-list > .work-card{
+  grid-template-columns:4.5% 34% 36.5% 20% !important;
+  column-gap:1.6666667% !important;
+}
+.work-number{
+  margin-left:.55vw !important;
+  margin-top:2.7vw !important;
+}
+.work-number .number-status{
+  min-width:0 !important;
+}
+
+.detail-btn,
+.select-btn{
+  font-size:1.75vw !important;
+}
+
+/* =========================================================
+   FINAL MICRO TUNE — VOTE STATUS TEXT + DATA STREAM 3-LINE
+   既存の高さ・幅・Safe Area・カード構造は変更しない。
+========================================================= */
+.selection-console .console-label{
+  display:flex !important;
+  align-items:center !important;
+  height:100% !important;
+  line-height:1 !important;
+  overflow:visible !important;
+  transform:translateY(-.08vw) !important;
+}
+.selection-console .console-left{
+  align-items:center !important;
+  overflow:visible !important;
+}
+
+/* DATA STREAM コメントを3行で確実に収める */
+.work-card:not(.detail-open) > .work-comment-block .work-comment{
+  font-size:1.38vw !important;
+  line-height:1.16 !important;
+  max-height:calc(1.16 * 3 * 1em) !important;
+  -webkit-line-clamp:3 !important;
+  line-clamp:3 !important;
+  overflow:hidden !important;
+  white-space:normal !important;
+  overflow-wrap:anywhere !important;
+}
+
+/* =========================================================
+   MICRO FIX 02 — VOTE STATUS VERTICAL FIT / COMMENT 3-LINE FIT
+   VOTE STATUSの文字と投票ボタンを高さ内に完全収納。
+   DATA STREAMコメントは3行を確実に収める。
+========================================================= */
+.selection-console{
+  overflow:hidden !important;
+}
+.selection-console .console-left,
+.selection-console .console-right{
+  height:100% !important;
+  min-height:0 !important;
+  box-sizing:border-box !important;
+  padding-top:0 !important;
+  padding-bottom:0 !important;
+}
+.selection-console .console-label{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  align-self:stretch !important;
+  box-sizing:border-box !important;
+  height:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  line-height:1 !important;
+  transform:none !important;
+}
+.selection-console #selected{
+  display:flex !important;
+  align-items:center !important;
+  height:100% !important;
+  box-sizing:border-box !important;
+  line-height:1 !important;
+}
+.selection-console .console-right .vote-button{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  align-self:stretch !important;
+  box-sizing:border-box !important;
+  height:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  line-height:1 !important;
+}
+.work-card:not(.detail-open) > .work-comment-block .work-comment{
+  font-size:1.15vw !important;
+  line-height:1.18 !important;
+  max-height:calc(1.18 * 3 * 1em) !important;
+  height:auto !important;
+  -webkit-line-clamp:3 !important;
+  line-clamp:3 !important;
+  overflow:hidden !important;
+}
+
+/* =========================================================
+   FIX 03 — VOTE STATUS GRID ROW / COMMENT 3-LINE UNIFICATION
+   VOTE STATUSの子要素がグリッド行の固有高さに引っ張られないよう固定。
+   コメントは通常時・DETAIL時とも同じ3行仕様に統一。
+========================================================= */
+.selection-console{
+  height:5.8vw !important;
+  min-height:0 !important;
+  max-height:5.8vw !important;
+  grid-template-rows:100% !important;
+  align-items:stretch !important;
+  overflow:hidden !important;
+  box-sizing:border-box !important;
+}
+.selection-console .console-left,
+.selection-console .console-right{
+  min-height:0 !important;
+  height:100% !important;
+  max-height:100% !important;
+  align-self:stretch !important;
+  overflow:hidden !important;
+  box-sizing:border-box !important;
+}
+.selection-console .console-label,
+.selection-console #selected,
+.selection-console .console-right .vote-button{
+  min-height:0 !important;
+  max-height:100% !important;
+  box-sizing:border-box !important;
+}
+.selection-console .console-label{
+  overflow:hidden !important;
+  text-overflow:clip !important;
+}
+.selection-console #selected{
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+
+/* DETAIL / 通常の両状態を同一の3行コメントへ */
+.work-card > .work-comment-block .work-comment{
+  display:-webkit-box !important;
+  -webkit-box-orient:vertical !important;
+  -webkit-line-clamp:3 !important;
+  line-clamp:3 !important;
+  width:100% !important;
+  max-width:100% !important;
+  height:auto !important;
+  max-height:calc(1.18 * 3 * 1em) !important;
+  min-width:0 !important;
+  overflow:hidden !important;
+  white-space:normal !important;
+  overflow-wrap:anywhere !important;
+  word-break:break-word !important;
+  line-break:auto !important;
+  font-size:1.48vw !important;
+  line-height:1.18 !important;
+}
+
+/* DETAIL時のブロックも3行で固定 */
+.work-card.detail-open > .work-comment-block{
+  height:auto !important;
+  min-height:0 !important;
+  max-height:calc(1.18 * 3 * 1em + 2vw) !important;
+  overflow:hidden !important;
+}
+.work-card.detail-open > .work-comment-block .work-comment{
+  display:-webkit-box !important;
+  -webkit-box-orient:vertical !important;
+  -webkit-line-clamp:3 !important;
+  line-clamp:3 !important;
+}
+
+/* =========================================================
+   FINAL USER TUNE — BUTTON HEIGHT / 2-LINE COMMENT / EMPTY DETAIL
+   - SELECT / DETAIL ボタンを縦方向にコンパクト化
+   - コメントは少し大きくし、通常時は2行＋…
+   - コメント空欄のDETAILではカードを縦に拡張しない
+========================================================= */
+.work-card > .work-actions .select-btn,
+.work-card > .work-actions .detail-btn{
+  height:5.8vw !important;
+  min-height:5.8vw !important;
+  max-height:5.8vw !important;
+}
+.work-card > .work-actions{
+  gap:.70vw !important;
+}
+
+/* 通常時：DETAIL時と同じ文字サイズ感。2行を上限に省略 */
+.work-card:not(.detail-open) > .work-comment-block .work-comment{
+  font-size:1.60vw !important;
+  line-height:1.18 !important;
+  display:-webkit-box !important;
+  -webkit-box-orient:vertical !important;
+  -webkit-line-clamp:2 !important;
+  line-clamp:2 !important;
+  max-height:calc(1.18 * 2 * 1em) !important;
+  height:auto !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:normal !important;
+  overflow-wrap:anywhere !important;
+  word-break:break-word !important;
+}
+
+/* DETAIL時もフォントサイズは通常時と統一。本文自体は全文表示 */
+.work-card.detail-open > .work-comment-block .work-comment{
+  font-size:1.60vw !important;
+  line-height:1.18 !important;
+  display:block !important;
+  -webkit-line-clamp:unset !important;
+  line-clamp:unset !important;
+  max-height:none !important;
+  height:auto !important;
+  overflow:visible !important;
+  white-space:normal !important;
+  overflow-wrap:anywhere !important;
+  word-break:break-word !important;
+}
+
