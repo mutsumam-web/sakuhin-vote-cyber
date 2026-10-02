@@ -1,6 +1,26 @@
 const MAX_VOTES=3;
 const STORAGE_KEY="sakuhin_vote_done_v15";
 const VOTE_TREND_REFRESH_MS=60000;
+const API_BASE=(window.__SAKUHIN_API_BASE__||'https://sakuhin-vote-api.mutsumam.workers.dev').replace(/\/$/,'');
+
+async function rpcCall(method){
+  const args=[].slice.call(arguments,1);
+  const response=await fetch(API_BASE+'/api/rpc',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({method:method,args:args})
+  });
+
+  let payload=null;
+  try{payload=await response.json();}catch(e){}
+
+  if(!response.ok||!payload||payload.ok!==true){
+    const code=payload&&payload.error?payload.error:'HTTP_'+response.status;
+    throw new Error(code);
+  }
+
+  return payload.result;
+}
 
 let works=[];
 let selected=[];
@@ -72,8 +92,8 @@ function loadVoteTrend(){
 
   status.textContent='SYNC ACTIVE';
 
-  google.script.run
-    .withSuccessHandler(function(data){
+  rpcCall('getVoteIntervalData')
+    .then(function(data){
       const rows=Array.isArray(data)?data:[];
       renderVoteTrend(rows);
       const total=document.getElementById('voteTrendTotal');
@@ -88,12 +108,11 @@ function loadVoteTrend(){
         minute:'2-digit'
       });
     })
-    .withFailureHandler(function(error){
+    .catch(function(error){
       status.textContent='DATA ERROR';
       renderVoteTrendError();
       console.error(error);
-    })
-    .getVoteIntervalData();
+    });
 }
 
 function renderVoteTrend(data){
@@ -224,19 +243,30 @@ function renderVoteTrendError(message){
 }
 
 function loadWorks(){
-  google.script.run
-    .withSuccessHandler(function(data){
+  rpcCall('getChoiceOptions')
+    .then(function(data){
       works=Array.isArray(data)?data:[];
       renderWorks();
     })
-    .withFailureHandler(function(error){
+    .catch(function(error){
       document.getElementById('works').textContent='作品データを取得できませんでした。';
       console.error(error);
-    })
-    .getChoiceOptions();
+    });
 }
 
 function parseChoiceInfo(value){
+  const work=works.find(function(item){
+    return item&&item.value===value;
+  });
+
+  if(work&&(work.title||work.author||work.comment)){
+    return{
+      title:String(work.title||'').trim(),
+      author:String(work.author||'').trim(),
+      comment:String(work.comment||'').trim()
+    };
+  }
+
   const raw=String(value==null?'':value).trim();
   if(!raw)return{title:'',author:'',comment:''};
 
@@ -837,8 +867,8 @@ function submitVote(){
   button.disabled=true;
   button.textContent='送信中…';
 
-  google.script.run
-    .withSuccessHandler(function(ok){
+  rpcCall('submitVoteToForm',selected.slice())
+    .then(function(ok){
       if(!ok){
         button.disabled=false;
         button.textContent='投票する';
@@ -853,12 +883,11 @@ function submitVote(){
       button.disabled=true;
       showVotedMask();
     })
-    .withFailureHandler(function(error){
+    .catch(function(error){
       button.disabled=false;
       button.textContent='投票する';
       alert('投票に失敗しました。\n'+error.message);
-    })
-    .submitVoteToForm(selected);
+    });
 }
 
 function showAdmin(){
@@ -870,8 +899,8 @@ function showAdmin(){
 }
 
 function adminReset(code){
-  google.script.run
-    .withSuccessHandler(function(ok){
+  rpcCall('adminReset',code)
+    .then(function(ok){
       if(!ok){
         alert('管理コードが違います。');
         return;
@@ -887,7 +916,9 @@ function adminReset(code){
       renderWorks();
       updateUI();
     })
-    .adminReset(code);
+    .catch(function(){
+      alert('管理コードの確認に失敗しました。');
+    });
 }
 
 if(document.readyState==='loading'){
