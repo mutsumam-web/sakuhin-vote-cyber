@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f5f7fc">
+<meta name="description" content="TUNAGU Voice Studio・Google Chirp 3 HDの日本語音声試験ページ">
+<title>TUNAGU Voice Studio — Google Chirp 3 HD</title>
+<style>
+:root{color-scheme:light;font-family:-apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN','Yu Gothic',Meiryo,sans-serif;color:#202c43;background:#f6f8fc}
+*{box-sizing:border-box}body{margin:0}main{max-width:780px;margin:0 auto;padding:28px 16px 72px}h1{font-size:clamp(27px,6vw,38px);line-height:1.27;letter-spacing:-.03em;margin:12px 0 8px}h2{font-size:18px;margin:0 0 13px}h3{font-size:15px;margin:0 0 8px}p{font-size:14px;color:#55667d;line-height:1.8}a{color:#315ca4}.eyebrow{font-size:11px;font-weight:800;letter-spacing:.15em;color:#5473a8}.sub{font-size:15px;margin-bottom:20px}.card{background:white;border:1px solid #e1e7f2;border-radius:20px;margin-top:15px;padding:20px;box-shadow:0 8px 30px rgba(19,36,70,.035)}.note{font-size:12px;color:#687891;line-height:1.75}.status{padding:12px 14px;background:#eaf0ff;border-radius:12px;color:#375381;font-size:12px;line-height:1.7}.label{display:block;font-weight:700;font-size:13px;margin-bottom:8px}textarea,input,select{font:inherit;border:1px solid #cfd8e7;border-radius:12px;padding:12px 13px;background:white;color:#202c43;outline-offset:3px;width:100%;min-height:48px}textarea{resize:vertical;line-height:1.85;min-height:158px;font-size:16px}button,.action{font:700 14px inherit;display:flex;align-items:center;justify-content:center;border:0;border-radius:12px;min-height:49px;padding:12px 15px;background:#23467f;color:#fff;cursor:pointer;text-decoration:none;text-align:center;line-height:1.4}button.secondary,.action.secondary{background:#eff3fa;color:#2c5087}button:disabled{opacity:.55;cursor:not-allowed}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #8cafff;outline-offset:2px}.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}.buttons{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}.buttons>button,.buttons>.action{flex:1}audio{width:100%;margin:12px 0 4px}.card-head{display:flex;gap:12px;align-items:center;justify-content:space-between}.pill{border-radius:99px;padding:5px 9px;font-size:11px;font-weight:700;white-space:nowrap;background:#eef1f8;color:#566887}.warn{background:#fff8e6;border:1px solid #f2dfaa;padding:12px 13px;border-radius:12px;font-size:12px;color:#715b21;line-height:1.8}.ready{background:#eaf8ed;color:#286440}.small{margin-top:8px;font-size:12px;color:#51637d}.out{display:none}.out.ready{display:block;background:none;padding:0}.out a{display:inline-block;margin-top:4px;font-size:13px}.message{min-height:18px;font-size:12px;margin-top:10px;color:#3e5986}.footer{font-size:12px;line-height:1.8;color:#718099;margin-top:30px}.sp{height:12px}.sample-links{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;margin-top:10px}.voice-type{font-size:12px;font-weight:normal;color:#74829b}@media(max-width:470px){.cols{grid-template-columns:1fr}.card{padding:17px}.card-head{align-items:start}.buttons{flex-direction:column}.buttons>button,.buttons>.action{width:100%}}
+</style>
+</head>
+<body><main>
+<div class="eyebrow">TUNAGU VOICE STUDIO / GOOGLE LAB</div>
+<h1>人のように、自然に。<br>Googleの声を試す。</h1>
+<p class="sub">Google Chirp 3 HD の日本語音声を、同じ原稿でA/B比較するためのiPhone向け試験ページ。</p>
+<div class="status" id="connection" role="status">公開試験ページです。Google CloudとのAPI接続はまだ有効化していません。今すぐ声を確認する場合は、下の「Google公式サンプル」を開いてください。</div>
+
+<section class="card">
+ <div class="card-head"><h2>1. 読ませたい文章</h2><span class="pill" id="count">0 / 500文字</span></div>
+ <label class="label" for="script">日本語の文章</label>
+ <textarea id="script" maxlength="500" spellcheck="false">あ、おかえり。今日はどうだった？ そうなんだ……それは大変だったね。でも、無理しなくていいよ。少し休んでから、ゆっくり話そう。</textarea>
+ <div class="buttons"><button class="secondary" type="button" id="copy">文章をコピー</button><button class="secondary" type="button" id="reset">サンプルに戻す</button></div>
+ <div class="message" id="copyStatus" aria-live="polite"></div>
+</section>
+<section class="card">
+ <div class="card-head"><h2>2. Googleの声を比較</h2><span class="pill">Chirp 3 HD</span></div>
+ <p class="note">音声A・Bは同じ文章を別の声で生成します。話速などChirp 3 HDで保証されないパラメータは用意していません。</p>
+ <div class="cols">
+  <div><label class="label" for="voiceA">音声 A</label><select id="voiceA">
+    <option value="Aoede">Aoede（女性）</option><option value="Kore">Kore（女性）</option><option value="Leda">Leda（女性）</option><option value="Zephyr">Zephyr（女性）</option>
+    <option value="Charon">Charon（男性）</option><option value="Puck">Puck（男性）</option><option value="Orus">Orus（男性）</option><option value="Achird">Achird（男性）</option>
+  </select><button type="button" id="makeA" style="margin-top:10px;width:100%" disabled>音声 A を生成</button>
+  <div id="outA" class="out"><audio id="audioA" controls preload="none"></audio><a id="downloadA" download="tunagu-google-A.mp3">MP3を保存</a></div></div>
+  <div><label class="label" for="voiceB">音声 B</label><select id="voiceB">
+    <option value="Kore">Kore（女性）</option><option value="Aoede">Aoede（女性）</option><option value="Leda">Leda（女性）</option><option value="Zephyr">Zephyr（女性）</option>
+    <option value="Charon">Charon（男性）</option><option value="Puck">Puck（男性）</option><option value="Orus">Orus（男性）</option><option value="Achird">Achird（男性）</option>
+  </select><button type="button" id="makeB" style="margin-top:10px;width:100%" disabled>音声 B を生成</button>
+  <div id="outB" class="out"><audio id="audioB" controls preload="none"></audio><a id="downloadB" download="tunagu-google-B.mp3">MP3を保存</a></div></div>
+ </div>
+ <div class="message" id="message" role="status" aria-live="polite"></div>
+ <div class="sp"></div>
+ <div class="warn">まだGoogle APIは未接続です。再生・MP3生成にはGoogle Cloudの認証設定が必要です。APIの認証情報をこのページに入力しないでください。</div>
+</section>
+<section class="card">
+ <h2>3. 今すぐGoogleの日本語音声を試聴</h2>
+ <p>Google公式の日本語音声一覧で、複数のChirp 3 HDの声を直接再生できます。こちらはGoogle Cloud APIの設定なしで聞けます。</p>
+ <a class="action" href="https://docs.cloud.google.com/text-to-speech/docs/list-voices-and-types?hl=ja" target="_blank" rel="noopener noreferrer">Google公式サンプルを聞く</a>
+ <p class="note">公式ページでは「日本語（日本）」または「ja-JP-Chirp3-HD」を探して再生してください。固定サンプルなので、上の文章との厳密な比較はできません。</p>
+</section>
+<section class="card">
+ <h2>4. 接続設定（APIが準備できたら）</h2>
+ <p>Cloudflare Workerを接続することで、iPhoneから好きな文章をGoogleの声で生成できます。Googleの秘密鍵はCloudflareのSecretに保存する設計です。</p>
+ <details id="settings"><summary style="cursor:pointer;font-weight:700;padding:8px 0">Cloudflare接続設定を開く</summary>
+  <div class="sp"></div>
+  <label class="label" for="endpoint">Cloudflare WorkerのURL</label><input id="endpoint" type="url" placeholder="https://example.workers.dev" autocomplete="off" spellcheck="false">
+  <div class="sp"></div>
+  <label class="label" for="code">試験用アクセスコード（GoogleのAPIキーではありません）</label><input id="code" type="password" placeholder="試験用アクセスコード" autocomplete="off" spellcheck="false">
+  <div class="buttons"><button id="connect" type="button">接続状態を確認</button><button type="button" class="secondary" id="disconnect">接続を解除</button></div>
+  <p class="note">このページは接続先URLだけを端末に保存します。アクセスコードは保存しません。</p>
+ </details>
+</section>
+<div class="footer"><a href="../compare/">音声エンジン比較へ戻る</a>　·　<a href="../">Voice Studioの元の試聴版</a><br>試験段階では架空の文章のみ使用してください。Googleの無料枠は月100万文字までですが、請求先登録が必要で上限超過分には料金が発生します。販売利用には本人確認・支払い制御・ログ管理の追加が必要です。</div>
+</main>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+const SAMPLE='あ、おかえり。今日はどうだった？ そうなんだ……それは大変だったね。でも、無理しなくていいよ。少し休んでから、ゆっくり話そう。';
+let baseURL='',accessCode='',busy=false;const objectURLs={A:null,B:null};
+const origin='https://mutsumam-web.github.io';
+const count=()=>{const n=Array.from($('script').value).length;$('count').textContent=`${n} / 500文字`;};
+$('script').addEventListener('input',count);count();
+$('reset').addEventListener('click',()=>{$('script').value=SAMPLE;count();$('copyStatus').textContent='サンプル原稿に戻しました。';});
+$('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('script').value);$('copyStatus').textContent='コピーしました。';}catch{const t=$('script');t.select();$('copyStatus').textContent='文章を選択しました。長押ししてコピーしてください。';}});
+const msg=(text)=>{$('message').textContent=text;};
+try{$('endpoint').value=localStorage.getItem('tunagu-google-worker-url')||'';}catch{}
+function enable(ok){baseURL=ok?$('endpoint').value.trim().replace(/\/+$/,''):'';accessCode=ok?$('code').value:'';$('makeA').disabled=!ok;$('makeB').disabled=!ok;$('connection').textContent=ok?'Google音声の接続先が確認できました。試験用アクセスコードが正しければ生成できます。':'Google音声API未接続。無料で聴く場合はGoogle公式サンプルをご利用ください。';}
+$('connect').addEventListener('click',async()=>{
+ const candidate=$('endpoint').value.trim().replace(/\/+$/,'');
+ try{const u=new URL(candidate);if(u.protocol!=='https:'||!u.hostname)throw Error('httpsのURLを入力');if(u.username||u.password||u.search||u.hash)throw Error('無効な接続先');
+ const response=await fetch(candidate+'/health',{cache:'no-store'});if(!response.ok)throw Error('接続できません');const data=await response.json();
+ if(data.service!=='tunagu-google-chirp-trial')throw Error('別のサービスです');
+ if(!data.configured){enable(false);msg('Workerは応答していますが、Google Cloud認証がまだ設定されていません。');return;}
+ if($('code').value.length<24)throw Error('試験用アクセスコードを入力してください');
+ try{localStorage.setItem('tunagu-google-worker-url',candidate);}catch{}
+ enable(true);msg('接続先を確認しました。音声生成にはGoogle Cloudの有効な設定が必要です。');
+ }catch(e){enable(false);msg('接続設定を確認してください：'+e.message);}
+});
+$('disconnect').addEventListener('click',()=>{enable(false);$('code').value='';msg('接続を解除しました');});
+async function generate(slot){
+ if(busy||!baseURL||!accessCode)return;
+ const text=$('script').value;const voice=$('voice'+slot).value;
+ if(!text.trim()||Array.from(text).length>500){msg('1〜500文字の文章を入力してください');return;}
+ busy=true;$('makeA').disabled=true;$('makeB').disabled=true;msg('Googleの音声を生成しています…');
+ try{
+  const response=await fetch(baseURL+'/api/tts',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+accessCode},body:JSON.stringify({text,voice})});
+  if(!response.ok){let reason='HTTP '+response.status;try{reason=(await response.json()).error||reason;}catch{}throw Error(reason);}
+  const blob=await response.blob();if(!blob.type.includes('audio')||!blob.size)throw Error('音声データがありません');
+  if(objectURLs[slot])URL.revokeObjectURL(objectURLs[slot]);objectURLs[slot]=URL.createObjectURL(blob);
+  $('audio'+slot).src=objectURLs[slot];$('download'+slot).href=objectURLs[slot];$('out'+slot).classList.add('ready');
+  msg(`音声${slot}（${voice}）を生成しました。再生・MP3保存できます。`);
+ }catch(e){msg('生成に失敗しました：'+e.message);}
+ finally{busy=false;$('makeA').disabled=!baseURL;$('makeB').disabled=!baseURL;}
+}
+$('makeA').addEventListener('click',()=>generate('A'));
+$('makeB').addEventListener('click',()=>generate('B'));
+window.addEventListener('pagehide',()=>{Object.values(objectURLs).filter(Boolean).forEach(URL.revokeObjectURL);});
+})();
+</script>
+</body></html>
