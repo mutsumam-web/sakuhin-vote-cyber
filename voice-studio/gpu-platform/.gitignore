@@ -1,0 +1,10 @@
+.env
+.dev.vars
+__pycache__/
+.pytest_cache/
+*.pyc
+.DS_Store
+models/
+*.wav
+*.mp3
+node_modules/

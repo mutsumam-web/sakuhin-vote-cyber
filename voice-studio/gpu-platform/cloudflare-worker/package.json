@@ -1,0 +1,8 @@
+{
+  "name": "tunagu-voice-gpu-gateway",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "deploy": "wrangler deploy", "dev": "wrangler dev" },
+  "devDependencies": { "wrangler": "^4.0.0" }
+}

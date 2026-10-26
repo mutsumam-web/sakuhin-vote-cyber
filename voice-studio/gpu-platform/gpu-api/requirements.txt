@@ -1,0 +1,5 @@
+fastapi>=0.115,<1
+uvicorn[standard]>=0.32,<1
+pydantic>=2.8,<3
+soundfile>=0.12,<1
+qwen-tts==0.1.1

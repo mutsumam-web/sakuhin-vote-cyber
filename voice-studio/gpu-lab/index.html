@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <meta name="theme-color" content="#12182a"/>
+  <title>TUNAGU Voice Studio | GPU Voice Lab</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0e1423;--panel:#192238;--line:#334059;--ink:#eef4ff;--muted:#b3bfda;--accent:#93e7cb;--violet:#bdacff}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 75% 5%,#263751 0,transparent 53%),var(--bg);color:var(--ink);font:16px -apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif}main{max-width:760px;margin:auto;padding:28px 18px 90px}.eyebrow{font-size:12px;letter-spacing:.18em;font-weight:700;color:var(--accent)}h1{font-size:clamp(31px,8vw,46px);line-height:1.12;margin:14px 0 12px;letter-spacing:-.04em}h2{font-size:19px;margin:0 0 13px}.subtitle{color:var(--muted);line-height:1.8;margin:0 0 23px}.panel{background:rgba(25,34,56,.94);border:1px solid var(--line);padding:22px;border-radius:20px;margin:17px 0;box-shadow:0 14px 42px #060b1530}.banner{padding:14px 17px;border:1px solid #61503b;background:#3b3025;color:#ffe1af;border-radius:14px;font-size:13px;line-height:1.7}label{font-size:13px;color:var(--muted);display:block;margin:18px 0 8px;font-weight:650}textarea,input,select{display:block;width:100%;font:inherit;background:#101a2d;color:var(--ink);border:1px solid #405070;border-radius:12px;padding:13px;outline:none}textarea{resize:vertical;min-height:135px;line-height:1.8}textarea:focus,input:focus,select:focus{border-color:var(--accent)}.field2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.pill{display:inline-block;background:#203945;color:var(--accent);padding:6px 10px;border-radius:99px;font-size:12px}.button{appearance:none;border:0;border-radius:14px;padding:14px 16px;font-size:15px;font-weight:800;min-height:50px;color:#10251f;background:var(--accent);cursor:pointer;flex:1}.button.alt{background:var(--violet);color:#172034}.button:disabled{filter:grayscale(1);opacity:.5}.buttons{display:flex;gap:10px;margin-top:20px}audio{width:100%;display:block;margin:12px 0}.status{min-height:22px;color:var(--accent);font-size:13px;line-height:1.6;white-space:pre-wrap}.muted{color:var(--muted);font-size:12px;line-height:1.8}a{color:var(--accent)}.result{background:#101a2d;padding:15px;border:1px solid #374560;border-radius:15px;margin-top:14px}.result h3{margin:0;font-size:14px}.download{color:var(--accent);font-size:13px;display:inline-block;margin-top:8px}.steps{font-size:13px;color:var(--muted);line-height:1.9}@media(max-width:420px){.field2{grid-template-columns:1fr}.buttons{flex-direction:column}.panel{padding:17px}}
+  </style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">TUNAGU VOICE STUDIO · GPU VOICE LAB</div>
+  <h1>声に、温度を。</h1>
+  <p class="subtitle">日本語の微妙な間や抑揚まで。自前GPUで生成する、自然な音声の比較スタジオ。</p>
+  <div class="banner" id="banner"><strong>研究用プレビュー</strong>　画面は利用できますが、GPUとCloudflareの接続が完了するまでAI音声は生成されません。iPhone標準のロボット音声は使いません。</div>
+  <section class="panel"><h2>01 · 読ませる文章</h2>
+    <label for="script">テキスト <span id="count">0</span>/240文字</label>
+    <textarea id="script" maxlength="240">あ、おかえり。今日はどうだった？ そうなんだ……それは大変だったね。でも、無理しなくていいよ。少し休んでから、ゆっくり話そう。</textarea>
+    <div class="field2">
+      <div><label for="voice">話者（日本語ネイティブ推奨）</label><select id="voice"><option value="Ono_Anna">Ono Anna · 日本語・女性</option><option value="Serena">Serena · やわらかい女性</option><option value="Uncle_Fu">Uncle Fu · 低音男性</option><option value="Ryan">Ryan · 男性</option></select></div>
+      <div><label for="format">保存形式</label><select id="format"><option value="wav">WAV · 品質確認用</option><option value="mp3">MP3 · 保存しやすい</option></select></div>
+    </div>
+    <label for="style">話し方の指示（自然な日本語で）</label>
+    <textarea id="style" maxlength="160" style="min-height:80px">相手の隣にいるように、やわらかく落ち着いた口調。過度な演技をせず、短い間を取りながら自然に。</textarea>
+    <div class="buttons"><button class="button" id="buttonA" type="button">声 A を生成</button><button class="button alt" id="buttonB" type="button">声 B を生成</button></div>
+    <div class="status" id="status" role="status" aria-live="polite"></div>
+    <div id="resultA" class="result" hidden><h3>音声 A</h3><audio controls preload="none"></audio><a class="download" download="tunagu-voice-A.wav">音声 A を保存</a></div>
+    <div id="resultB" class="result" hidden><h3>音声 B</h3><audio controls preload="none"></audio><a class="download" download="tunagu-voice-B.wav">音声 B を保存</a></div>
+  </section>
+  <section class="panel"><h2>02 · GPU接続</h2>
+    <p class="muted">公開試験用の接続設定。実際のGPUトークンはこの画面には入力しないでください。必要なのはCloudflare WorkerのURLと試験用コードだけです。入力値は保存・送信先以外へ送信しません。</p>
+    <label for="gateway">Cloudflare音声APIのURL</label><input id="gateway" type="url" placeholder="https://tunagu-voice-gpu-gateway.***.workers.dev" autocomplete="off" autocapitalize="off" spellcheck="false"/>
+    <label for="access">試験用アクセスコード</label><input id="access" type="password" placeholder="試験用コード" autocomplete="off"/>
+    <div class="buttons"><button type="button" class="button alt" id="check">中継サーバーを確認</button></div>
+    <p class="status" id="connectStatus" role="status"></p>
+  </section>
+  <p class="muted">独自Qwen3-TTSをGPUで実行する実験版です。本人の許諾のない声の模倣、個人情報を含む文章の生成はしないでください。応答時間はGPUと文章の長さにより変わります。試験提供であり、本番販売や無制限利用には対応していません。</p>
+  <p class="steps">既存のiPhone標準音声との聞き比べは <a href="../">従来の試聴版</a> からできます。</p>
+</main>
+<script>
+'use strict';
+const $ = x=>document.getElementById(x);
+const urls={};
+function status(message){$('status').textContent=message;}
+function gatewayURL(){
+  const value=$('gateway').value.trim().replace(/\/+$/,'');
+  if(!value)throw new Error('GPU接続前です。Cloudflare WorkerのURLが必要です。');
+  let url;
+  try{url=new URL(value);}catch(_){throw new Error('URLを確認してください。');}
+  if(url.protocol!=='https:' || !url.hostname.endsWith('.workers.dev') || url.username || url.password || url.pathname!=='/')throw new Error('Cloudflare WorkerのHTTPS URLを入力してください。');
+  return url.origin;
+}
+function setBusy(busy){$('buttonA').disabled=busy;$('buttonB').disabled=busy;}
+function showResult(slot,blob,fmt){
+  if(urls[slot])URL.revokeObjectURL(urls[slot]);
+  urls[slot]=URL.createObjectURL(blob);
+  const section=$('result'+slot);section.hidden=false;
+  const player=section.querySelector('audio');player.src=urls[slot];
+  const link=section.querySelector('a');link.href=urls[slot];link.download=`tunagu-voice-${slot}.${fmt}`;
+  player.play().catch(()=>{});
+}
+async function generate(slot){
+  let base;
+  try{base=gatewayURL();}catch(e){status(e.message);return;}
+  const text=$('script').value.trim();
+  if(!text||text.length>240){status('文章は1〜240文字で入力してください。');return;}
+  const code=$('access').value;
+  if(!code){status('試験用アクセスコードが必要です。');return;}
+  setBusy(true);status(`声 ${slot} をGPUで生成中…… 初回はモデル読み込みのため時間がかかる場合があります。`);
+  try{
+    const fmt=$('format').value;
+    const response=await fetch(base+'/api/tts',{method:'POST',headers:{'Content-Type':'application/json','X-Demo-Code':code},
+      body:JSON.stringify({text,voice:$('voice').value,style:$('style').value,format:fmt}),signal:AbortSignal.timeout(100000)});
+    if(!response.ok){let err='';try{err=(await response.json()).error||'';}catch(_){}throw new Error(`生成できませんでした（HTTP ${response.status}）。${err}`);}
+    const blob=await response.blob();
+    if(!blob.type.startsWith('audio/'))throw new Error('音声データを取得できませんでした。');
+    showResult(slot,blob,fmt);status(`声 ${slot} の生成が完了しました。再生・保存できます。`);
+  }catch(e){status(e.name==='TimeoutError'?'GPUの応答がタイムアウトしました。':e.message||'生成に失敗しました。');}
+  finally{setBusy(false);}
+}
+$('buttonA').addEventListener('click',()=>generate('A'));
+$('buttonB').addEventListener('click',()=>generate('B'));
+$('script').addEventListener('input',()=>{$('count').textContent=[...$('script').value].length;});
+$('count').textContent=[...$('script').value].length;
+$('check').addEventListener('click',async()=>{try{const base=gatewayURL();$('connectStatus').textContent='確認中……';const r=await fetch(base+'/api/health');if(!r.ok)throw Error('中継サーバーへの接続に失敗しました');const j=await r.json();$('connectStatus').textContent=j.gateway==='online'?'Cloudflare中継は応答中。GPUの稼働は音声生成時に確認します。':'接続先を確認してください。';}catch(e){$('connectStatus').textContent=e.message;}});
+window.addEventListener('pagehide',()=>Object.values(urls).forEach(x=>URL.revokeObjectURL(x)));
+</script>
+</body>
+</html>
