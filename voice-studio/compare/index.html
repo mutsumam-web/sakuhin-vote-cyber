@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f5f7fc">
+<title>TUNAGU Voice Studio | 聞き比べ</title>
+<meta name="description" content="iPhoneで日本語AI音声を聞き比べる独立試聴ページ。">
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",Meiryo,sans-serif;background:#f5f7fc;color:#17243e}*{box-sizing:border-box}body{margin:0}.wrap{max-width:750px;margin:auto;padding:26px 16px 85px}.eyebrow{letter-spacing:.16em;font-size:11px;color:#5b6ea0;font-weight:800}h1{font-size:27px;line-height:1.4;margin:11px 0}h2{font-size:19px;margin:0 0 8px}h3{font-size:15px;margin:0 0 8px}p{line-height:1.8;color:#506079;margin:8px 0 0;font-size:14px}.lead{font-size:15px}.card{border:1px solid #e4e8f2;border-radius:20px;background:white;box-shadow:0 7px 22px rgba(23,36,62,.035);padding:20px;margin-top:15px}.chips{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.chip{border-radius:100px;background:#eef2fa;color:#53678f;padding:5px 10px;font-size:11px;font-weight:700}.chip.good{background:#eaf8ed;color:#296440}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:12px;font:700 14px inherit;text-decoration:none;padding:13px 16px;cursor:pointer;border:0;background:#203d78;color:white;text-align:center;line-height:1.4}.btn.secondary{background:#edf1fb;color:#203d78}.btn.outline{border:1px solid #ced7eb;color:#203d78;background:white}.full{width:100%}.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.note{font-size:12px;color:#65748b;line-height:1.7}.hint{border-left:3px solid #9eb8ec;padding-left:12px}.sample{font-size:16px;line-height:1.9;border:1px solid #dfe6f3;border-radius:13px;width:100%;padding:13px;min-height:120px;color:#15213a;resize:vertical;background:#fbfcff}.label{font-size:13px;font-weight:700;margin-bottom:8px;display:block}.stat{font-size:12px;font-weight:700;color:#2b6c47;min-height:18px;margin-top:6px}.audio{width:100%;margin-top:13px} .stars{display:flex;gap:6px;margin-top:12px}.star{font-size:24px;border:1px solid #d9e0ed;border-radius:10px;background:#fff;width:45px;height:42px;cursor:pointer;color:#9ba7be}.star.selected{background:#fff5e1;border-color:#f1cb66;color:#ae7b08}.subtle{color:#758198;font-size:12px}.footer{margin-top:28px;font-size:12px;color:#71819b;line-height:1.9}.row{display:flex;justify-content:space-between;align-items:center;gap:8px}a{color:#1d57ae} button:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid #77a0ed;outline-offset:2px}@media(max-width:360px){.actions{grid-template-columns:1fr}h1{font-size:24px}}
+</style></head><body><main class="wrap">
+<div class="eyebrow">TUNAGU VOICE STUDIO / LISTENING LAB</div>
+<h1>人間らしい声を、<br>iPhoneで聞き比べる。</h1>
+<p class="lead">MeloTTS・Google Chirp 3 HD・Qwen3-TTSの日本語音声を試すためのリンクを集めた比較ページです。クラウドAPIはまだ統合していません。</p>
+
+<section class="card"><h2>① 比較用の同じ文章</h2>
+<p>文章をコピーし、各デモの入力欄に貼り付けて再生してください。同じ原稿で比較できます。</p>
+<div style="height:12px"></div><label class="label" for="script">試験用の文章（自由に編集可）</label>
+<textarea class="sample" id="script" maxlength="700" spellcheck="false">あ、おかえり。今日はどうだった？ そうなんだ……それは大変だったね。でも、無理しなくていいよ。少し休んでから、ゆっくり話そう。</textarea>
+<div class="actions"><button class="btn" id="copy" type="button">文章をコピー</button><button class="btn secondary" id="default" type="button">原稿を元に戻す</button></div>
+<div class="stat" id="copyStatus" role="status" aria-live="polite"></div>
+<p class="note">実名や個人情報は入力せず、架空の文章で試してください。</p></section>
+
+<section class="card" id="melo"><div class="row"><h2>② MeloTTS</h2><span class="chip good">低コスト候補</span></div>
+<p>公開済みの日本語サンプル音声を、このページ内でそのまま聞けます。サンプルの文章は上の比較用原稿とは異なります。</p>
+<audio class="audio" controls preload="none" id="meloAudio" src="https://raw.githubusercontent.com/hangry-labs/MeloTTS/main/examples/melotts-jp.mp3">音声を再生できません。</audio>
+<p class="note">出典：hangry-labs/MeloTTS の公開日本語音声サンプル。外部配信のため再生できない場合があります。</p>
+<div class="actions"><a class="btn secondary" href="https://huggingface.co/spaces/mrfakename/MeloTTS" target="_blank" rel="noopener noreferrer">同じ文章で生成</a><a class="btn outline" href="https://github.com/hangry-labs/MeloTTS/blob/main/examples/melotts-jp.mp3" target="_blank" rel="noopener noreferrer">音声サンプルを開く</a></div>
+<p class="note">Hugging Faceのデモは非公式で、停止・混雑している場合があります。言語は「JP」など日本語を選択してください。</p>
+<div class="stars" role="group" aria-label="MeloTTS自然さ評価" data-engine="melo"></div></section>
+
+<section class="card" id="chirp"><div class="row"><h2>③ Google Chirp 3 HD</h2><span class="chip">高品質候補</span></div>
+<p>日本語音声を指定して、コピーした文章を入力します。外部の「読み上げクラウド」無料体験ページへ移動します。</p>
+<div class="actions"><a class="btn full" href="https://yomiage.cloud/app" target="_blank" rel="noopener noreferrer">Chirp 3 HDを試す</a><a class="btn secondary" href="https://docs.cloud.google.com/text-to-speech/docs/list-voices-and-types?hl=ja" target="_blank" rel="noopener noreferrer">Google公式サンプル</a></div>
+<p class="note">第三者運営サイト。無料体験・登録・上限はサイトの表示を確認してください。Google公式ページは固定サンプルの試聴です。</p>
+<div class="stars" role="group" aria-label="Chirp 3 HD自然さ評価" data-engine="chirp"></div></section>
+
+<section class="card" id="qwen"><div class="row"><h2>④ Qwen3-TTS</h2><span class="chip">独自エンジン候補</span></div>
+<p>オープンモデルを使うデモ。日本語を選んで、声質や話し方の指示も試します。</p>
+<div class="actions"><a class="btn full" href="https://normalin-qwen3-tts.hf.space/" target="_blank" rel="noopener noreferrer">Qwen3-TTSを試す</a><a class="btn secondary" href="https://huggingface.co/spaces/normalin/Qwen3-TTS" target="_blank" rel="noopener noreferrer">モデルのデモ情報</a></div>
+<p class="note">公開Hugging Face Spaceを使用。無料GPU枠が混雑すると利用できないことがあります。</p>
+<div class="stars" role="group" aria-label="Qwen3-TTS自然さ評価" data-engine="qwen"></div></section>
+
+<section class="card"><h2>⑤ 比較のポイント</h2>
+<p class="hint">同じ文章を聞き、「声の自然さ」「日本語のイントネーション」「間の取り方」「感情表現」の順に評価してみてください。</p>
+<p>各モデルの★はこのiPhone内にのみ保存。サービス側へ送信されません。</p>
+<div id="ratingSummary" class="note" style="margin-top:12px">まだ評価はありません。</div>
+<div class="actions"><button class="btn secondary" id="clearRatings" type="button">評価を消去</button><a class="btn outline" href="../">元のVoice Studio</a></div>
+</section>
+
+<div class="footer">これは試聴先をまとめたリンク集です。Google・MeloTTS・Qwen3-TTSの有料APIやGPUを起動したものではありません。各デモの生成品質・無料枠・稼働状況は提供元に依存します。<br>© TUNAGU Voice Studio — independent comparison prototype</div>
+</main>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const sample='あ、おかえり。今日はどうだった？ そうなんだ……それは大変だったね。でも、無理しなくていいよ。少し休んでから、ゆっくり話そう。';
+$('default').addEventListener('click',()=>{$('script').value=sample;$('copyStatus').textContent='原稿を元に戻しました';});
+$('copy').addEventListener('click',async()=>{
+ const el=$('script'),value=el.value;
+ try{
+  if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(value);}
+  else{el.focus();el.select();const ok=document.execCommand('copy');if(!ok)throw new Error('copy not supported');}
+  $('copyStatus').textContent='コピーしました。次のページで貼り付けてください。';
+ }catch(e){el.focus();el.select();$('copyStatus').textContent='文章を選択しました。長押しして「コピー」を選んでください。';}
+});
+const KEY='tunagu-voice-compare-ratings-v1';
+let ratings={};
+try{ratings=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){ratings={};}
+const labels={melo:'MeloTTS',chirp:'Chirp 3 HD',qwen:'Qwen3-TTS'};
+function updateSummary(){
+const rows=Object.entries(labels).filter(([k])=>ratings[k]).map(([k,v])=>v+': ★'.repeat(ratings[k])+'☆'.repeat(5-ratings[k]));
+$('ratingSummary').textContent=rows.length?rows.join('　／　'):'まだ評価はありません。';
+}
+document.querySelectorAll('.stars').forEach(holder=>{
+const id=holder.dataset.engine;
+const lbl=document.createElement('span');lbl.className='subtle';lbl.textContent='自然さ';lbl.style.alignSelf='center';holder.appendChild(lbl);
+for(let v=1;v<=5;v++){
+ const b=document.createElement('button');b.type='button';b.className='star';b.textContent='★';b.setAttribute('aria-label',v+'点');b.title='自然さ '+v+' / 5';
+ b.addEventListener('click',()=>{ratings[id]=v;try{localStorage.setItem(KEY,JSON.stringify(ratings));}catch(e){}render();});holder.appendChild(b);
+}
+function render(){holder.querySelectorAll('button').forEach((b,i)=>{b.classList.toggle('selected',i<(ratings[id]||0));b.setAttribute('aria-pressed',String(i+1===ratings[id]));});updateSummary();}
+render();
+});
+$('clearRatings').addEventListener('click',()=>{ratings={};try{localStorage.removeItem(KEY)}catch(e){}document.querySelectorAll('.stars').forEach(h=>h.querySelectorAll('button').forEach(b=>{b.classList.remove('selected');b.setAttribute('aria-pressed','false');}));updateSummary();});
+})();
+</script></body></html>
