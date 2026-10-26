@@ -1,10 +1,16 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "tunagu-google-chirp-trial",
-  "main": "index.mjs",
+  "name": "tunagu-voice-google",
+  "main": "worker.js",
   "compatibility_date": "2026-10-01",
-  "observability": { "enabled": false },
-  "ratelimits": [
-    { "name": "GENERATE_RATE_LIMIT", "namespace_id": "2007", "simple": { "limit": 5, "period": 60 } }
-  ]
+  "workers_dev": true,
+  "vars": {
+    "ALLOWED_ORIGIN": "https://mutsumam-web.github.io",
+    "GOOGLE_PROJECT_ID": "REPLACE_WITH_YOUR_GCP_PROJECT_ID"
+  },
+  "ratelimits": [{
+    "name": "TTS_RATE_LIMIT",
+    "namespace_id": "570219",
+    "simple": {"limit": 3, "period": 60}
+  }]
 }

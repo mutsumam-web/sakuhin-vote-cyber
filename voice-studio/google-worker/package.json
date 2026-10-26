@@ -1,7 +1,5 @@
 {
-  "name": "tunagu-google-chirp-trial-worker",
-  "private": true,
-  "type": "module",
-  "scripts": {"dev": "wrangler dev", "deploy": "wrangler deploy", "test": "node --test ../tests/worker.test.mjs"},
-  "devDependencies": {"wrangler": "^4.0.0"}
+ "name":"tunagu-voice-google-worker", "private":true, "type":"module",
+ "scripts":{"test":"node --test","deploy":"wrangler deploy"},
+ "devDependencies":{"wrangler":"^4.0.0"}
 }
