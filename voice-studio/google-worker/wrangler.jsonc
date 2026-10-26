@@ -6,7 +6,7 @@
   "workers_dev": true,
   "vars": {
     "ALLOWED_ORIGIN": "https://mutsumam-web.github.io",
-    "GOOGLE_PROJECT_ID": "REPLACE_WITH_YOUR_GCP_PROJECT_ID"
+    "GOOGLE_PROJECT_ID": "rapid-gadget-512808-h7"
   },
   "ratelimits": [{
     "name": "TTS_RATE_LIMIT",
