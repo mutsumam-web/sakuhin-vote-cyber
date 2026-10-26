@@ -1,0 +1,5 @@
+node_modules/
+.dev.vars*
+.env*
+*.pem
+*service-account*.json

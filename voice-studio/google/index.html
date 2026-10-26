@@ -41,7 +41,7 @@
  </div>
  <div class="message" id="message" role="status" aria-live="polite"></div>
  <div class="sp"></div>
- <div class="warn">まだGoogle APIは未接続です。再生・MP3生成にはGoogle Cloudの認証設定が必要です。APIの認証情報をこのページに入力しないでください。</div>
+ <div class="warn" id="setupNotice">Google APIを接続するまでは生成できません。下のGoogle公式日本語音声サンプルは無料で試聴できます。APIの秘密鍵はこのページに入力しないでください。</div>
 </section>
 <section class="card">
  <h2>3. 今すぐGoogleの日本語音声を試聴</h2>
@@ -75,7 +75,7 @@ $('reset').addEventListener('click',()=>{$('script').value=SAMPLE;count();$('cop
 $('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('script').value);$('copyStatus').textContent='コピーしました。';}catch{const t=$('script');t.select();$('copyStatus').textContent='文章を選択しました。長押ししてコピーしてください。';}});
 const msg=(text)=>{$('message').textContent=text;};
 try{$('endpoint').value=localStorage.getItem('tunagu-google-worker-url')||'';}catch{}
-function enable(ok){baseURL=ok?$('endpoint').value.trim().replace(/\/+$/,''):'';accessCode=ok?$('code').value:'';$('makeA').disabled=!ok;$('makeB').disabled=!ok;$('connection').textContent=ok?'Google音声の接続先が確認できました。試験用アクセスコードが正しければ生成できます。':'Google音声API未接続。無料で聴く場合はGoogle公式サンプルをご利用ください。';}
+function enable(ok){baseURL=ok?$('endpoint').value.trim().replace(/\/+$/,''):'';accessCode=ok?$('code').value:'';$('makeA').disabled=!ok;$('makeB').disabled=!ok;$('connection').textContent=ok?'Google音声の接続先が確認できました。試験用アクセスコードが正しければ生成できます。':'Google音声API未接続。無料で聴く場合はGoogle公式サンプルをご利用ください。';$('setupNotice').textContent=ok?'接続先が設定されました。Google Cloud側の認証が有効なら、上のボタンからMP3を生成できます。':'Google APIを接続するまでは生成できません。下のGoogle公式日本語音声サンプルは無料で試聴できます。APIの秘密鍵はこのページに入力しないでください。';}
 $('connect').addEventListener('click',async()=>{
  const candidate=$('endpoint').value.trim().replace(/\/+$/,'');
  try{const u=new URL(candidate);if(u.protocol!=='https:'||!u.hostname)throw Error('httpsのURLを入力');if(u.username||u.password||u.search||u.hash)throw Error('無効な接続先');

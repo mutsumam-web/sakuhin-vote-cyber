@@ -1,0 +1,10 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tunagu-google-chirp-trial",
+  "main": "index.mjs",
+  "compatibility_date": "2026-10-01",
+  "observability": { "enabled": false },
+  "ratelimits": [
+    { "name": "GENERATE_RATE_LIMIT", "namespace_id": "2007", "simple": { "limit": 5, "period": 60 } }
+  ]
+}
