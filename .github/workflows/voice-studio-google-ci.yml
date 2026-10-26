@@ -1,0 +1,37 @@
+name: Voice Studio Google checks
+on:
+  push:
+    paths:
+      - "voice-studio/index.html"
+      - "voice-studio/google-worker/**"
+      - ".github/workflows/voice-studio-google-ci.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify-google-integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Google Worker unit tests
+        run: node --test voice-studio/google-worker/worker.test.js
+      - name: Frontend script syntax and controls
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import vm from 'node:vm';
+          import assert from 'node:assert/strict';
+          const html=fs.readFileSync('voice-studio/index.html','utf8');
+          const scripts=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
+          assert.ok(scripts.length>0,'No inline script found');
+          for(const [i,m] of scripts.entries()) new vm.Script(m[1],{filename:'inline-'+i+'.js'});
+          for(const id of ['googleControls','googleWorkerUrl','googleConnect','googleAccessCode','googleVoice','googleRate']){
+            assert.ok(html.includes('id="'+id+'"'),'Missing Google control '+id);
+          }
+          assert.ok(html.includes('data-provider="google"'));
+          assert.ok(html.includes('data-provider="browser"'));
+          console.log('Frontend script syntax and Google controls verified');
+          NODE
